@@ -258,6 +258,7 @@ Makefile: MistaSnake.pro D:\QT\5.12.1\msvc2017\mkspecs\win32-msvc\qmake.conf D:\
 		D:\QT\5.12.1\msvc2017\mkspecs\features\resources.prf \
 		D:\QT\5.12.1\msvc2017\mkspecs\features\moc.prf \
 		D:\QT\5.12.1\msvc2017\mkspecs\features\win32\opengl.prf \
+		D:\QT\5.12.1\msvc2017\mkspecs\features\uic.prf \
 		D:\QT\5.12.1\msvc2017\mkspecs\features\qmake_use.prf \
 		D:\QT\5.12.1\msvc2017\mkspecs\features\file_copies.prf \
 		D:\QT\5.12.1\msvc2017\mkspecs\features\testcase_targets.prf \
@@ -265,6 +266,7 @@ Makefile: MistaSnake.pro D:\QT\5.12.1\msvc2017\mkspecs\win32-msvc\qmake.conf D:\
 		D:\QT\5.12.1\msvc2017\mkspecs\features\yacc.prf \
 		D:\QT\5.12.1\msvc2017\mkspecs\features\lex.prf \
 		MistaSnake.pro \
+		D:\QT\5.12.1\msvc2017\lib\Qt5Widgets.prl \
 		D:\QT\5.12.1\msvc2017\lib\Qt5Gui.prl \
 		D:\QT\5.12.1\msvc2017\lib\Qt5Core.prl
 	$(QMAKE) -o Makefile MistaSnake.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -449,6 +451,7 @@ D:\QT\5.12.1\msvc2017\mkspecs\features\qt.prf:
 D:\QT\5.12.1\msvc2017\mkspecs\features\resources.prf:
 D:\QT\5.12.1\msvc2017\mkspecs\features\moc.prf:
 D:\QT\5.12.1\msvc2017\mkspecs\features\win32\opengl.prf:
+D:\QT\5.12.1\msvc2017\mkspecs\features\uic.prf:
 D:\QT\5.12.1\msvc2017\mkspecs\features\qmake_use.prf:
 D:\QT\5.12.1\msvc2017\mkspecs\features\file_copies.prf:
 D:\QT\5.12.1\msvc2017\mkspecs\features\testcase_targets.prf:
@@ -456,6 +459,7 @@ D:\QT\5.12.1\msvc2017\mkspecs\features\exceptions.prf:
 D:\QT\5.12.1\msvc2017\mkspecs\features\yacc.prf:
 D:\QT\5.12.1\msvc2017\mkspecs\features\lex.prf:
 MistaSnake.pro:
+D:\QT\5.12.1\msvc2017\lib\Qt5Widgets.prl:
 D:\QT\5.12.1\msvc2017\lib\Qt5Gui.prl:
 D:\QT\5.12.1\msvc2017\lib\Qt5Core.prl:
 qmake: FORCE

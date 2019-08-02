@@ -1,4 +1,5 @@
 QT += gui
+QT += widgets
 
 CONFIG += c++14 console
 CONFIG -= app_bundle
@@ -33,7 +34,8 @@ SOURCES += \
     Cell.cpp \
     Ground.cpp \
     SnakePart.cpp \
-    SnakeHead.cpp
+    SnakeHead.cpp \
+    MainWindow.cpp
 
 DISTFILES += \
         textures/wood.jpg \
@@ -54,6 +56,10 @@ HEADERS += \
     Wall.h \
     Ground.h \
     SnakePart.h \
-    SnakeHead.h
+    SnakeHead.h \
+    MainWindow.h
+
+FORMS += \
+    MainWindow.ui
 
 
