@@ -31,8 +31,7 @@ void MainWindow::runGame(unsigned int width, unsigned int height, unsigned int c
             if (event.type == sf::Event::Closed || parentClose)
             {
                 window.close();
-                QPushButton * el = this->findChild<QPushButton *>("startGame");
-                el->setEnabled(true);
+                ui->startGame->setEnabled(true);
             }
         }
         window.clear();
@@ -46,14 +45,10 @@ void MainWindow::runGame(unsigned int width, unsigned int height, unsigned int c
 
 void MainWindow::on_startGame_clicked()
 {
-    QPushButton * bt = this->findChild<QPushButton *>("startGame");
-    bt->setEnabled(false);
-    QSpinBox * el = this->findChild<QSpinBox *>("height");
-    unsigned int height = el->text().toUInt();
-    el = this->findChild<QSpinBox *>("width");
-    unsigned int width = el->text().toUInt();
-    el = this->findChild<QSpinBox *>("cellSize");
-    unsigned int cellSize = el->text().toUInt();
+    ui->startGame->setEnabled(false);
+    unsigned int height = ui->height->text().toUInt();
+    unsigned int width = ui->width->text().toUInt();
+    unsigned int cellSize = ui->cellSize->text().toUInt();
 
     runGame(width, height, cellSize);
 }

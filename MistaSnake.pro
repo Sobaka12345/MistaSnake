@@ -29,18 +29,20 @@ SOURCES += \
     Field.cpp \
     CellObject.cpp \
     Stone.cpp \
-    Stone.cpp \
     Wall.cpp \
     Cell.cpp \
     Ground.cpp \
     SnakePart.cpp \
     SnakeHead.cpp \
-    MainWindow.cpp
+    MainWindow.cpp \
+    Snake.cpp
 
 DISTFILES += \
         textures/wood.jpg \
         textures/stone.bmp \
-        textures/wall.png
+        textures/wall.png \
+        textures/body.JPG \
+        textures/head.bmp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -52,12 +54,12 @@ HEADERS += \
     Field.h \
     CellObject.h \
     Stone.h \
-    Stone.h \
     Wall.h \
     Ground.h \
     SnakePart.h \
     SnakeHead.h \
-    MainWindow.h
+    MainWindow.h \
+    Snake.h
 
 FORMS += \
     MainWindow.ui

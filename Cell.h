@@ -5,8 +5,8 @@
 
 class Cell
 {
-    ///cell coordinates
     unsigned int x, y;
+
     CellObject * object;
 
 public:

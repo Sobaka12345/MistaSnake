@@ -1,5 +1,6 @@
 #include "Cell.h"
 
+
 Cell::Cell() : x(0), y(0)
 {}
 

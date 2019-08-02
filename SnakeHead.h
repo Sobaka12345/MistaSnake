@@ -5,8 +5,9 @@
 
 class SnakeHead : public SnakePart
 {
+
 public:
-    SnakeHead();
+    explicit SnakeHead(sf::Sprite _sprite, Cell * _position);
 };
 
 #endif // SNAKEHEAD_H

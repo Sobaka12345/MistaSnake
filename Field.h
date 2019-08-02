@@ -9,6 +9,7 @@
 #include "Wall.h"
 #include "Ground.h"
 #include "Cell.h"
+#include "Snake.h"
 
 class Field
 {
@@ -19,6 +20,7 @@ class Field
 
     sf::Texture t_ground, t_wall, t_stone;
     sf::Sprite s_ground, s_wall, s_stone;
+    std::vector <Snake *> snakes;
 
     std::vector<Cell *> blocked, free, food;
 
@@ -30,6 +32,7 @@ public:
 
     void generateBorders();
     void generateWorld();
+    void generateSnakes();
 
     std::vector<sf::Sprite> onDraw() const
     {
@@ -38,6 +41,9 @@ public:
             out.push_back(x->getObject()->getSprite());
         for(auto x : free)
             out.push_back(x->getObject()->getSprite());
+        for(auto x : snakes)
+            for(auto y : x->getSnakeParts())
+                out.push_back(y);
 
         return out;
     }

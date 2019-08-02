@@ -2,10 +2,6 @@
 
 Field * Field::p_instance = nullptr;
 
-#include <QTemporaryFile>
-#include <QFile>
-#include <stdint.h>
-#include <inttypes.h>
 
 Field * Field::createField(unsigned int _width, unsigned int _height, unsigned int _size)
 {
@@ -20,6 +16,7 @@ Field * Field::createField(unsigned int _width, unsigned int _height, unsigned i
     p_instance->generateBorders();
     p_instance->generateWorld();
 
+    p_instance->generateSnakes();
     return p_instance;
 }
 
@@ -34,6 +31,8 @@ Field::Field(unsigned int _width, unsigned int _height, unsigned int _size)
 Field::~Field()
 {
     fieldAllocator.deallocate(field, width * height);
+    for(auto x : snakes)
+        delete x;
     p_instance = nullptr;
 }
 
@@ -71,4 +70,16 @@ void Field::generateWorld()///testo
                 blocked.push_back(field + width * i + j);
             }
         }
+}
+
+void Field::generateSnakes()
+{
+    std::vector<Cell*> in;
+    sf::Sprite body(s_wall);
+    sf::Sprite head(s_stone);
+    in.push_back(getCell(2,2));
+    in.push_back(getCell(2,3));
+    body.setPosition(getCell(2, 2)->getX() * cellSize, getCell(2, 2)->getY() * cellSize);
+    head.setPosition(getCell(2, 3)->getX() * cellSize, getCell(2, 3)->getY() * cellSize);
+    snakes.push_back(new Snake(in, head, body));
 }
