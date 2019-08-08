@@ -16,10 +16,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 TARGET = MistaSnake
 
-LIBS += -L"$$PWD/libs/SFML/lib"
+linux-g++ | linux-g++-64 | linux-g++-32 {
+    LIBS += -L/usr/lib/x86_64-linux-gnu
 
-CONFIG(release, debug|release): LIBS += -lsfml-audio -lsfml-graphics -lsfml-main -lsfml-network -lsfml-window -lsfml-system
-CONFIG(debug, debug|release): LIBS += -lsfml-audio-d -lsfml-graphics-d -lsfml-main-d -lsfml-network-d -lsfml-window-d -lsfml-system-d
+    LIBS += -lsfml-audio -lsfml-graphics -lsfml-main -lsfml-network -lsfml-window -lsfml-system
+}
+
+win32 {
+    LIBS += -L"$$PWD/libs/SFML/lib"
+
+    CONFIG(release, debug|release): LIBS += -lsfml-audio -lsfml-graphics -lsfml-main -lsfml-network -lsfml-window -lsfml-system
+    CONFIG(debug, debug|release): LIBS += -lsfml-audio-d -lsfml-graphics-d -lsfml-main-d -lsfml-network-d -lsfml-window-d -lsfml-system-d
+}
 
 INCLUDEPATH += "$$PWD/libs/SFML/include"
 DEPENDPATH += "$$PWD/libs/SFML/include"
@@ -27,22 +35,24 @@ DEPENDPATH += "$$PWD/libs/SFML/include"
 SOURCES += \
         main.cpp \
     Field.cpp \
-    CellObject.cpp \
-    Stone.cpp \
-    Wall.cpp \
+    objects/CellObject.cpp \
+    objects/Stone.cpp \
+    objects/Wall.cpp \
     Cell.cpp \
-    Ground.cpp \
-    SnakePart.cpp \
-    SnakeHead.cpp \
+    objects/Ground.cpp \
+    activeObjects/SnakePart.cpp \
+    activeObjects/SnakeHead.cpp \
     MainWindow.cpp \
-    Snake.cpp
+    snakes/Snake.cpp \
+    snakes/LavaSnake.cpp
 
 DISTFILES += \
         textures/wood.jpg \
         textures/stone.bmp \
         textures/wall.png \
         textures/body.JPG \
-        textures/head.bmp
+        textures/head.bmp \
+        textures/wood_13.jpg
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -52,14 +62,15 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     Cell.h \
     Field.h \
-    CellObject.h \
-    Stone.h \
-    Wall.h \
-    Ground.h \
-    SnakePart.h \
-    SnakeHead.h \
+    objects/CellObject.h \
+    objects/Stone.h \
+    objects/Wall.h \
+    objects/Ground.h \
+    activeObjects/SnakePart.h \
+    activeObjects/SnakeHead.h \
     MainWindow.h \
-    Snake.h
+    snakes/Snake.h \
+    snakes/LavaSnake.h
 
 FORMS += \
     MainWindow.ui

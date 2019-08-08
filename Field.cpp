@@ -1,5 +1,6 @@
 #include "Field.h"
 
+unsigned int Cell::Size;
 Field * Field::p_instance = nullptr;
 
 
@@ -8,11 +9,12 @@ Field * Field::createField(unsigned int _width, unsigned int _height, unsigned i
     if(p_instance != nullptr)
         return nullptr;
 
+    Cell::setSize(_size);
     p_instance = new Field(_width, _height, _size);
 
-    p_instance->setGroundSprite("textures/wood.jpg", 50.0f);
-    p_instance->setWallSprite("textures/wall.png", 360.0f);
-    p_instance->setStoneSprite("textures/stone.bmp", 128.0f);
+    p_instance->setSprite("textures/wood_13.jpg", 100.0f, p_instance->t_ground, p_instance->s_ground);
+    p_instance->setSprite("textures/wall.png", 360.0f,  p_instance->t_wall, p_instance->s_wall);
+    p_instance->setSprite("textures/stone.bmp", 128.0f,  p_instance->t_stone, p_instance->s_stone);
     p_instance->generateBorders();
     p_instance->generateWorld();
 
@@ -51,12 +53,12 @@ void Field::generateBorders()
         }
 }
 
-void Field::generateWorld()///testo
+void Field::generateWorld()///for KISA
 {
     for(unsigned int i = 1; i < height - 1; i++)
         for(unsigned int j = 1; j < width - 1; j++)
         {
-            if(rand() % 10 > 1)
+            if(rand() % 10 >= 2)
             {
                 sf::Sprite temp(s_ground);
                 temp.setPosition(static_cast<float>(j * cellSize), static_cast<float>(i * cellSize));
@@ -72,14 +74,27 @@ void Field::generateWorld()///testo
         }
 }
 
-void Field::generateSnakes()
+
+
+void Field::generateSnakes()///for KISA
 {
     std::vector<Cell*> in;
-    sf::Sprite body(s_wall);
-    sf::Sprite head(s_stone);
+
     in.push_back(getCell(2,2));
     in.push_back(getCell(2,3));
-    body.setPosition(getCell(2, 2)->getX() * cellSize, getCell(2, 2)->getY() * cellSize);
-    head.setPosition(getCell(2, 3)->getX() * cellSize, getCell(2, 3)->getY() * cellSize);
-    snakes.push_back(new Snake(in, head, body));
+    in.push_back(getCell(2,4));
+
+    snakes.push_back(LavaSnake::createLavaSnake(in, this));
+
+    in.push_back(getCell(5,2));
+    in.push_back(getCell(5,3));
+    in.push_back(getCell(5,4));
+
+    snakes.push_back(LavaSnake::createLavaSnake(in, this));
+}
+
+void Field::update(float dt)
+{
+    for(auto x: snakes)
+        x->update(dt);
 }

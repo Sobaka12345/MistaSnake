@@ -12,9 +12,11 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QListView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
@@ -32,6 +34,9 @@ public:
     QLabel *label_2;
     QLabel *label_3;
     QPushButton *startGame;
+    QScrollArea *scrollArea;
+    QWidget *scrollAreaWidgetContents;
+    QListView *listView;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -79,6 +84,17 @@ public:
         font1.setPointSize(48);
         startGame->setFont(font1);
         startGame->setCursor(QCursor(Qt::OpenHandCursor));
+        scrollArea = new QScrollArea(centralwidget);
+        scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
+        scrollArea->setGeometry(QRect(0, 0, 201, 121));
+        scrollArea->setWidgetResizable(true);
+        scrollAreaWidgetContents = new QWidget();
+        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 199, 119));
+        listView = new QListView(scrollAreaWidgetContents);
+        listView->setObjectName(QString::fromUtf8("listView"));
+        listView->setGeometry(QRect(0, 0, 201, 121));
+        scrollArea->setWidget(scrollAreaWidgetContents);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));

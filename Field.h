@@ -5,11 +5,12 @@
 
 #include <SFML/Graphics/Texture.hpp>
 
-#include "Stone.h"
-#include "Wall.h"
-#include "Ground.h"
-#include "Cell.h"
-#include "Snake.h"
+#include "objects/Stone.h"
+#include "objects/Wall.h"
+#include "objects/Ground.h"
+#include "snakes/LavaSnake.h"
+
+
 
 class Field
 {
@@ -27,12 +28,14 @@ class Field
     Field(unsigned int _width, unsigned int _height, unsigned int _size);
 public:
     static Field * createField(unsigned int _width, unsigned int _height, unsigned int _size);
+    void update(float dt);
 
     ~Field();
 
     void generateBorders();
     void generateWorld();
     void generateSnakes();
+    void generateFood(unsigned int max);
 
     std::vector<sf::Sprite> onDraw() const
     {
@@ -49,25 +52,11 @@ public:
     }
 
 
-    void setGroundSprite(const char * filename, float picSize)
+    void setSprite(const char * filename, float picSize, sf::Texture & _texture, sf::Sprite & _sprite)
     {
-        t_ground.loadFromFile(filename);
-        s_ground.setTexture(t_ground);
-        s_ground.setScale(cellSize / picSize, cellSize / picSize);
-    }
-
-    void setWallSprite(const char * filename, float picSize)
-    {
-        t_wall.loadFromFile(filename);
-        s_wall.setTexture(t_wall);
-        s_wall.setScale(cellSize / picSize, cellSize / picSize);
-    }
-
-    void setStoneSprite(const char * filename, float picSize)
-    {
-        t_stone.loadFromFile(filename);
-        s_stone.setTexture(t_stone);
-        s_stone.setScale(cellSize / picSize, cellSize / picSize);
+        _texture.loadFromFile(filename);
+        _sprite.setTexture(_texture);
+        _sprite.setScale(cellSize / picSize, cellSize / picSize);
     }
 
     Cell * getCell(unsigned int x, unsigned int y)

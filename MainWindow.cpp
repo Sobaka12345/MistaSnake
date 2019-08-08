@@ -23,8 +23,12 @@ void MainWindow::runGame(unsigned int width, unsigned int height, unsigned int c
 
     parentClose = false;
 
+    sf::Clock clock;
+    sf::Time elapsed_1;
     while (window.isOpen())
     {
+        sf::Time elapsed = clock.restart();
+        elapsed_1 += elapsed;
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -37,6 +41,11 @@ void MainWindow::runGame(unsigned int width, unsigned int height, unsigned int c
         window.clear();
         for (auto x: field->onDraw())
             window.draw(x);
+        if(elapsed_1.asSeconds() > 0.1)
+        {
+            field->update(1);
+            elapsed_1 = elapsed_1.Zero;
+        }
         window.display();
     }
 
@@ -56,5 +65,6 @@ void MainWindow::on_startGame_clicked()
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
+    Q_UNUSED(event);
     parentClose = true;
 }
