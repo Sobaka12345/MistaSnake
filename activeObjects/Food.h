@@ -2,11 +2,11 @@
 #define FOOD_H
 
 #include "Cell.h"
-#include "objects/CellObject.h"
+#include "ActiveObject.h"
 
-class Food : public CellObject
+class Food : public ActiveObject
 {
-    Cell * position;
+
 public:
     Food(sf::Sprite _sprite, Cell * _position);
 };

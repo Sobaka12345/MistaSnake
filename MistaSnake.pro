@@ -66,7 +66,8 @@ SOURCES += \
     MainWindow.cpp \
     snakes/Snake.cpp \
     snakes/LavaSnake.cpp \
-    activeObjects/Food.cpp
+    activeObjects/Food.cpp \
+    activeObjects/ActiveObject.cpp
 
 DISTFILES += \
         textures/wood.jpg \
@@ -94,7 +95,8 @@ HEADERS += \
     MainWindow.h \
     snakes/Snake.h \
     snakes/LavaSnake.h \
-    activeObjects/Food.h
+    activeObjects/Food.h \
+    activeObjects/ActiveObject.h
 
 FORMS += \
     MainWindow.ui

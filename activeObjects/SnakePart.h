@@ -3,12 +3,11 @@
 
 class Field;
 #include "Cell.h"
-#include "objects/CellObject.h"
+#include "ActiveObject.h"
 
-class SnakePart : public CellObject
+class SnakePart : public ActiveObject
 {
 protected:
-    Cell * position;
     bool _is_head;
 
 public:

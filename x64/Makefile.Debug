@@ -59,7 +59,8 @@ SOURCES       = ..\main.cpp \
 		..\MainWindow.cpp \
 		..\snakes\Snake.cpp \
 		..\snakes\LavaSnake.cpp \
-		..\activeObjects\Food.cpp debug\moc_MainWindow.cpp
+		..\activeObjects\Food.cpp \
+		..\activeObjects\ActiveObject.cpp debug\moc_MainWindow.cpp
 OBJECTS       = debug\main.obj \
 		debug\Field.obj \
 		debug\CellObject.obj \
@@ -73,6 +74,7 @@ OBJECTS       = debug\main.obj \
 		debug\Snake.obj \
 		debug\LavaSnake.obj \
 		debug\Food.obj \
+		debug\ActiveObject.obj \
 		debug\moc_MainWindow.obj
 
 DIST          = textures/wood.jpg \
@@ -80,7 +82,8 @@ DIST          = textures/wood.jpg \
 		textures/wall.png \
 		textures/body.JPG \
 		textures/head.bmp \
-		textures/wood_13.jpg ..\Cell.h \
+		textures/wood_13.jpg \
+		textures/wine.png ..\Cell.h \
 		..\Field.h \
 		..\objects\CellObject.h \
 		..\objects\Stone.h \
@@ -91,7 +94,8 @@ DIST          = textures/wood.jpg \
 		..\MainWindow.h \
 		..\snakes\Snake.h \
 		..\snakes\LavaSnake.h \
-		..\activeObjects\Food.h ..\main.cpp \
+		..\activeObjects\Food.h \
+		..\activeObjects\ActiveObject.h ..\main.cpp \
 		..\Field.cpp \
 		..\objects\CellObject.cpp \
 		..\objects\Stone.cpp \
@@ -103,7 +107,8 @@ DIST          = textures/wood.jpg \
 		..\MainWindow.cpp \
 		..\snakes\Snake.cpp \
 		..\snakes\LavaSnake.cpp \
-		..\activeObjects\Food.cpp
+		..\activeObjects\Food.cpp \
+		..\activeObjects\ActiveObject.cpp
 QMAKE_TARGET  = MistaSnake
 DESTDIR        = debug\ #avoid trailing-slash linebreak
 TARGET         = MistaSnake.exe
@@ -240,7 +245,7 @@ all: Makefile.Debug  debug\MistaSnake.exe
 
 debug\MistaSnake.exe: ui_MainWindow.h $(OBJECTS) 
 	$(LINKER) $(LFLAGS) /MANIFEST:embed /OUT:$(DESTDIR_TARGET) @<<
-debug\main.obj debug\Field.obj debug\CellObject.obj debug\Stone.obj debug\Wall.obj debug\Cell.obj debug\Ground.obj debug\SnakePart.obj debug\SnakeHead.obj debug\MainWindow.obj debug\Snake.obj debug\LavaSnake.obj debug\Food.obj debug\moc_MainWindow.obj
+debug\main.obj debug\Field.obj debug\CellObject.obj debug\Stone.obj debug\Wall.obj debug\Cell.obj debug\Ground.obj debug\SnakePart.obj debug\SnakeHead.obj debug\MainWindow.obj debug\Snake.obj debug\LavaSnake.obj debug\Food.obj debug\ActiveObject.obj debug\moc_MainWindow.obj
 $(LIBS)
 <<
 
@@ -250,10 +255,10 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) MistaSnake.zip $(SOURCES) $(DIST) ..\MistaSnake.pro D:\QT\5.12.1\msvc2017_64\mkspecs\features\spec_pre.prf D:\QT\5.12.1\msvc2017_64\mkspecs\common\angle.conf D:\QT\5.12.1\msvc2017_64\mkspecs\common\windows-vulkan.conf D:\QT\5.12.1\msvc2017_64\mkspecs\common\msvc-desktop.conf D:\QT\5.12.1\msvc2017_64\mkspecs\qconfig.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3danimation.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3danimation_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dcore.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dcore_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dextras.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dextras_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dinput.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dinput_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dlogic.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dlogic_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dquick.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dquick_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dquickanimation.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dquickanimation_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dquickextras.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dquickextras_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dquickinput.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dquickinput_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dquickrender.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dquickrender_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dquickscene2d.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dquickscene2d_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3drender.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3drender_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_accessibility_support_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_axbase.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_axbase_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_axcontainer.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_axcontainer_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_axserver.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_axserver_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_bluetooth.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_bluetooth_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_bootstrap_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_charts.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_charts_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_concurrent.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_concurrent_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_core.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_core_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_datavisualization.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_datavisualization_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_dbus.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_dbus_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_designer.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_designer_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_designercomponents_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_edid_support_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_egl_support_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_fb_support_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_fontdatabase_support_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_gamepad.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_gamepad_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_gui.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_gui_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_help.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_help_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_location.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_location_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_multimedia.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_multimedia_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_multimediawidgets.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_network.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_network_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_networkauth.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_networkauth_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_nfc.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_nfc_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_opengl.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_opengl_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_openglextensions.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_openglextensions_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_packetprotocol_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_platformcompositor_support_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_positioning.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_positioning_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_positioningquick.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_positioningquick_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_printsupport.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_printsupport_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_purchasing.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_purchasing_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_qml.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_qml_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_qmldebug_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_qmldevtools_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_qmltest.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_qmltest_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_quick.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_quick_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_quickcontrols2.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_quickparticles_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_quickshapes_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_quickwidgets.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_quickwidgets_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_remoteobjects.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_remoteobjects_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_repparser.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_repparser_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_script.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_script_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_scripttools.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_scripttools_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_scxml.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_scxml_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_sensors.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_sensors_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_serialbus.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_serialbus_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_serialport.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_serialport_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_sql.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_sql_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_svg.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_svg_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_testlib.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_testlib_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_texttospeech.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_texttospeech_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_theme_support_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_uiplugin.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_uitools.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_uitools_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_virtualkeyboard.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_virtualkeyboard_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_vulkan_support_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_webchannel.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_webchannel_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_webengine.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_webengine_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_webenginecore.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_webenginecore_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_webenginecoreheaders_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_webenginewidgets.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_webenginewidgets_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_websockets.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_websockets_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_webview.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_webview_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_widgets.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_widgets_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_winextras.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_winextras_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_xml.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_xml_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_xmlpatterns.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_zlib_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\features\qt_functions.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\qt_config.prf D:\QT\5.12.1\msvc2017_64\mkspecs\win32-msvc\qmake.conf D:\QT\5.12.1\msvc2017_64\mkspecs\features\spec_post.prf .qmake.stash D:\QT\5.12.1\msvc2017_64\mkspecs\features\exclusive_builds.prf D:\QT\5.12.1\msvc2017_64\mkspecs\common\msvc-version.conf D:\QT\5.12.1\msvc2017_64\mkspecs\features\toolchain.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\default_pre.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\win32\default_pre.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\resolve_config.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\exclusive_builds_post.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\default_post.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\build_pass.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\win32\console.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\qml_debug.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\precompile_header.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\warn_on.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\qt.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\resources.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\moc.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\win32\opengl.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\uic.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\qmake_use.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\file_copies.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\testcase_targets.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\exceptions.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\yacc.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\lex.prf ..\MistaSnake.pro D:\QT\5.12.1\msvc2017_64\lib\Qt5Widgetsd.prl D:\QT\5.12.1\msvc2017_64\lib\Qt5Guid.prl D:\QT\5.12.1\msvc2017_64\lib\Qt5Cored.prl    D:\QT\5.12.1\msvc2017_64\mkspecs\features\data\dummy.cpp ..\Cell.h ..\Field.h ..\objects\CellObject.h ..\objects\Stone.h ..\objects\Wall.h ..\objects\Ground.h ..\activeObjects\SnakePart.h ..\activeObjects\SnakeHead.h ..\MainWindow.h ..\snakes\Snake.h ..\snakes\LavaSnake.h ..\activeObjects\Food.h  ..\main.cpp ..\Field.cpp ..\objects\CellObject.cpp ..\objects\Stone.cpp ..\objects\Wall.cpp ..\Cell.cpp ..\objects\Ground.cpp ..\activeObjects\SnakePart.cpp ..\activeObjects\SnakeHead.cpp ..\MainWindow.cpp ..\snakes\Snake.cpp ..\snakes\LavaSnake.cpp ..\activeObjects\Food.cpp ..\MainWindow.ui    
+	$(ZIP) MistaSnake.zip $(SOURCES) $(DIST) ..\MistaSnake.pro D:\QT\5.12.1\msvc2017_64\mkspecs\features\spec_pre.prf D:\QT\5.12.1\msvc2017_64\mkspecs\common\angle.conf D:\QT\5.12.1\msvc2017_64\mkspecs\common\windows-vulkan.conf D:\QT\5.12.1\msvc2017_64\mkspecs\common\msvc-desktop.conf D:\QT\5.12.1\msvc2017_64\mkspecs\qconfig.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3danimation.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3danimation_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dcore.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dcore_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dextras.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dextras_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dinput.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dinput_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dlogic.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dlogic_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dquick.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dquick_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dquickanimation.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dquickanimation_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dquickextras.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dquickextras_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dquickinput.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dquickinput_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dquickrender.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dquickrender_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dquickscene2d.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3dquickscene2d_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3drender.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_3drender_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_accessibility_support_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_axbase.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_axbase_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_axcontainer.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_axcontainer_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_axserver.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_axserver_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_bluetooth.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_bluetooth_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_bootstrap_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_charts.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_charts_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_concurrent.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_concurrent_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_core.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_core_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_datavisualization.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_datavisualization_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_dbus.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_dbus_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_designer.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_designer_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_designercomponents_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_edid_support_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_egl_support_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_fb_support_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_fontdatabase_support_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_gamepad.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_gamepad_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_gui.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_gui_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_help.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_help_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_location.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_location_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_multimedia.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_multimedia_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_multimediawidgets.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_network.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_network_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_networkauth.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_networkauth_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_nfc.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_nfc_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_opengl.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_opengl_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_openglextensions.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_openglextensions_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_packetprotocol_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_platformcompositor_support_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_positioning.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_positioning_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_positioningquick.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_positioningquick_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_printsupport.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_printsupport_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_purchasing.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_purchasing_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_qml.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_qml_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_qmldebug_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_qmldevtools_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_qmltest.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_qmltest_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_quick.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_quick_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_quickcontrols2.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_quickparticles_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_quickshapes_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_quickwidgets.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_quickwidgets_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_remoteobjects.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_remoteobjects_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_repparser.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_repparser_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_script.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_script_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_scripttools.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_scripttools_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_scxml.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_scxml_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_sensors.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_sensors_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_serialbus.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_serialbus_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_serialport.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_serialport_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_sql.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_sql_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_svg.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_svg_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_testlib.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_testlib_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_texttospeech.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_texttospeech_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_theme_support_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_uiplugin.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_uitools.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_uitools_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_virtualkeyboard.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_virtualkeyboard_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_vulkan_support_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_webchannel.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_webchannel_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_webengine.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_webengine_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_webenginecore.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_webenginecore_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_webenginecoreheaders_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_webenginewidgets.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_webenginewidgets_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_websockets.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_websockets_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_webview.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_webview_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_widgets.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_widgets_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_winextras.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_winextras_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_xml.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_xml_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_xmlpatterns.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\modules\qt_lib_zlib_private.pri D:\QT\5.12.1\msvc2017_64\mkspecs\features\qt_functions.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\qt_config.prf D:\QT\5.12.1\msvc2017_64\mkspecs\win32-msvc\qmake.conf D:\QT\5.12.1\msvc2017_64\mkspecs\features\spec_post.prf .qmake.stash D:\QT\5.12.1\msvc2017_64\mkspecs\features\exclusive_builds.prf D:\QT\5.12.1\msvc2017_64\mkspecs\common\msvc-version.conf D:\QT\5.12.1\msvc2017_64\mkspecs\features\toolchain.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\default_pre.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\win32\default_pre.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\resolve_config.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\exclusive_builds_post.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\default_post.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\build_pass.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\win32\console.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\qml_debug.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\precompile_header.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\warn_on.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\qt.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\resources.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\moc.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\win32\opengl.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\uic.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\qmake_use.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\file_copies.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\testcase_targets.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\exceptions.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\yacc.prf D:\QT\5.12.1\msvc2017_64\mkspecs\features\lex.prf ..\MistaSnake.pro D:\QT\5.12.1\msvc2017_64\lib\Qt5Widgetsd.prl D:\QT\5.12.1\msvc2017_64\lib\Qt5Guid.prl D:\QT\5.12.1\msvc2017_64\lib\Qt5Cored.prl    D:\QT\5.12.1\msvc2017_64\mkspecs\features\data\dummy.cpp ..\Cell.h ..\Field.h ..\objects\CellObject.h ..\objects\Stone.h ..\objects\Wall.h ..\objects\Ground.h ..\activeObjects\SnakePart.h ..\activeObjects\SnakeHead.h ..\MainWindow.h ..\snakes\Snake.h ..\snakes\LavaSnake.h ..\activeObjects\Food.h ..\activeObjects\ActiveObject.h  ..\main.cpp ..\Field.cpp ..\objects\CellObject.cpp ..\objects\Stone.cpp ..\objects\Wall.cpp ..\Cell.cpp ..\objects\Ground.cpp ..\activeObjects\SnakePart.cpp ..\activeObjects\SnakeHead.cpp ..\MainWindow.cpp ..\snakes\Snake.cpp ..\snakes\LavaSnake.cpp ..\activeObjects\Food.cpp ..\activeObjects\ActiveObject.cpp ..\MainWindow.ui    
 
 clean: compiler_clean 
-	-$(DEL_FILE) debug\main.obj debug\Field.obj debug\CellObject.obj debug\Stone.obj debug\Wall.obj debug\Cell.obj debug\Ground.obj debug\SnakePart.obj debug\SnakeHead.obj debug\MainWindow.obj debug\Snake.obj debug\LavaSnake.obj debug\Food.obj debug\moc_MainWindow.obj
+	-$(DEL_FILE) debug\main.obj debug\Field.obj debug\CellObject.obj debug\Stone.obj debug\Wall.obj debug\Cell.obj debug\Ground.obj debug\SnakePart.obj debug\SnakeHead.obj debug\MainWindow.obj debug\Snake.obj debug\LavaSnake.obj debug\Food.obj debug\ActiveObject.obj debug\moc_MainWindow.obj
 	-$(DEL_FILE) debug\MistaSnake.exp debug\MistaSnake.vc.pdb debug\MistaSnake.ilk debug\MistaSnake.idb
 
 distclean: clean 
@@ -492,6 +497,8 @@ debug\moc_MainWindow.cpp: ..\MainWindow.h \
 		..\objects\Ground.h \
 		..\activeObjects\Food.h \
 		..\Cell.h \
+		..\ActiveObjects\ActiveObject.h \
+		..\activeObjects\ActiveObject.h \
 		..\snakes\LavaSnake.h \
 		..\snakes\Snake.h \
 		..\activeObjects\SnakeHead.h \
@@ -740,6 +747,8 @@ debug\main.obj: ..\main.cpp D:\QT\5.12.1\msvc2017_64\include\QtWidgets\QApplicat
 		..\objects\Ground.h \
 		..\activeObjects\Food.h \
 		..\Cell.h \
+		..\ActiveObjects\ActiveObject.h \
+		..\activeObjects\ActiveObject.h \
 		..\snakes\LavaSnake.h \
 		..\snakes\Snake.h \
 		..\activeObjects\SnakeHead.h \
@@ -772,6 +781,8 @@ debug\Field.obj: ..\Field.cpp ..\Field.h \
 		..\objects\Ground.h \
 		..\activeObjects\Food.h \
 		..\Cell.h \
+		..\ActiveObjects\ActiveObject.h \
+		..\activeObjects\ActiveObject.h \
 		..\snakes\LavaSnake.h \
 		..\snakes\Snake.h \
 		..\activeObjects\SnakeHead.h \
@@ -846,6 +857,7 @@ debug\Wall.obj: ..\objects\Wall.cpp ..\objects\Wall.h \
 		..\libs\SFML64\include\SFML\Graphics\Vertex.hpp
 
 debug\Cell.obj: ..\Cell.cpp ..\Cell.h \
+		..\ActiveObjects\ActiveObject.h \
 		..\objects\CellObject.h \
 		..\libs\SFML64\include\SFML\Graphics\Texture.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Export.hpp \
@@ -893,6 +905,7 @@ debug\Ground.obj: ..\objects\Ground.cpp ..\objects\Ground.h \
 
 debug\SnakePart.obj: ..\activeObjects\SnakePart.cpp ..\activeObjects\SnakePart.h \
 		..\Cell.h \
+		..\ActiveObjects\ActiveObject.h \
 		..\objects\CellObject.h \
 		..\libs\SFML64\include\SFML\Graphics\Texture.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Export.hpp \
@@ -914,6 +927,7 @@ debug\SnakePart.obj: ..\activeObjects\SnakePart.cpp ..\activeObjects\SnakePart.h
 		..\libs\SFML64\include\SFML\Graphics\Transform.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Transformable.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Vertex.hpp \
+		..\activeObjects\ActiveObject.h \
 		..\Field.h \
 		..\objects\Stone.h \
 		..\objects\Wall.h \
@@ -926,6 +940,7 @@ debug\SnakePart.obj: ..\activeObjects\SnakePart.cpp ..\activeObjects\SnakePart.h
 debug\SnakeHead.obj: ..\activeObjects\SnakeHead.cpp ..\activeObjects\SnakeHead.h \
 		..\activeObjects\SnakePart.h \
 		..\Cell.h \
+		..\ActiveObjects\ActiveObject.h \
 		..\objects\CellObject.h \
 		..\libs\SFML64\include\SFML\Graphics\Texture.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Export.hpp \
@@ -946,7 +961,8 @@ debug\SnakeHead.obj: ..\activeObjects\SnakeHead.cpp ..\activeObjects\SnakeHead.h
 		..\libs\SFML64\include\SFML\Graphics\BlendMode.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Transform.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Transformable.hpp \
-		..\libs\SFML64\include\SFML\Graphics\Vertex.hpp
+		..\libs\SFML64\include\SFML\Graphics\Vertex.hpp \
+		..\activeObjects\ActiveObject.h
 
 debug\MainWindow.obj: ..\MainWindow.cpp ..\MainWindow.h \
 		D:\QT\5.12.1\msvc2017_64\include\QtWidgets\QMainWindow \
@@ -1158,6 +1174,8 @@ debug\MainWindow.obj: ..\MainWindow.cpp ..\MainWindow.h \
 		..\objects\Ground.h \
 		..\activeObjects\Food.h \
 		..\Cell.h \
+		..\ActiveObjects\ActiveObject.h \
+		..\activeObjects\ActiveObject.h \
 		..\snakes\LavaSnake.h \
 		..\snakes\Snake.h \
 		..\activeObjects\SnakeHead.h \
@@ -1171,6 +1189,11 @@ debug\MainWindow.obj: ..\MainWindow.cpp ..\MainWindow.h \
 		D:\QT\5.12.1\msvc2017_64\include\QtWidgets\qdesktopwidget.h \
 		D:\QT\5.12.1\msvc2017_64\include\QtGui\qguiapplication.h \
 		D:\QT\5.12.1\msvc2017_64\include\QtGui\qinputmethod.h \
+		D:\QT\5.12.1\msvc2017_64\include\QtWidgets\QGridLayout \
+		D:\QT\5.12.1\msvc2017_64\include\QtWidgets\qgridlayout.h \
+		D:\QT\5.12.1\msvc2017_64\include\QtWidgets\qlayout.h \
+		D:\QT\5.12.1\msvc2017_64\include\QtWidgets\qlayoutitem.h \
+		D:\QT\5.12.1\msvc2017_64\include\QtWidgets\qboxlayout.h \
 		D:\QT\5.12.1\msvc2017_64\include\QtWidgets\QLabel \
 		D:\QT\5.12.1\msvc2017_64\include\QtWidgets\qlabel.h \
 		D:\QT\5.12.1\msvc2017_64\include\QtWidgets\qframe.h \
@@ -1205,6 +1228,7 @@ debug\Snake.obj: ..\snakes\Snake.cpp ..\snakes\Snake.h \
 		..\activeObjects\SnakeHead.h \
 		..\activeObjects\SnakePart.h \
 		..\Cell.h \
+		..\ActiveObjects\ActiveObject.h \
 		..\objects\CellObject.h \
 		..\libs\SFML64\include\SFML\Graphics\Texture.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Export.hpp \
@@ -1225,13 +1249,15 @@ debug\Snake.obj: ..\snakes\Snake.cpp ..\snakes\Snake.h \
 		..\libs\SFML64\include\SFML\Graphics\BlendMode.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Transform.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Transformable.hpp \
-		..\libs\SFML64\include\SFML\Graphics\Vertex.hpp
+		..\libs\SFML64\include\SFML\Graphics\Vertex.hpp \
+		..\activeObjects\ActiveObject.h
 
 debug\LavaSnake.obj: ..\snakes\LavaSnake.cpp ..\snakes\LavaSnake.h \
 		..\snakes\Snake.h \
 		..\activeObjects\SnakeHead.h \
 		..\activeObjects\SnakePart.h \
 		..\Cell.h \
+		..\ActiveObjects\ActiveObject.h \
 		..\objects\CellObject.h \
 		..\libs\SFML64\include\SFML\Graphics\Texture.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Export.hpp \
@@ -1252,10 +1278,12 @@ debug\LavaSnake.obj: ..\snakes\LavaSnake.cpp ..\snakes\LavaSnake.h \
 		..\libs\SFML64\include\SFML\Graphics\BlendMode.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Transform.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Transformable.hpp \
-		..\libs\SFML64\include\SFML\Graphics\Vertex.hpp
+		..\libs\SFML64\include\SFML\Graphics\Vertex.hpp \
+		..\activeObjects\ActiveObject.h
 
 debug\Food.obj: ..\activeObjects\Food.cpp ..\activeObjects\Food.h \
 		..\Cell.h \
+		..\ActiveObjects\ActiveObject.h \
 		..\objects\CellObject.h \
 		..\libs\SFML64\include\SFML\Graphics\Texture.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Export.hpp \
@@ -1276,7 +1304,33 @@ debug\Food.obj: ..\activeObjects\Food.cpp ..\activeObjects\Food.h \
 		..\libs\SFML64\include\SFML\Graphics\BlendMode.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Transform.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Transformable.hpp \
-		..\libs\SFML64\include\SFML\Graphics\Vertex.hpp
+		..\libs\SFML64\include\SFML\Graphics\Vertex.hpp \
+		..\activeObjects\ActiveObject.h
+
+debug\ActiveObject.obj: ..\activeObjects\ActiveObject.cpp ..\activeObjects\ActiveObject.h \
+		..\objects\CellObject.h \
+		..\libs\SFML64\include\SFML\Graphics\Texture.hpp \
+		..\libs\SFML64\include\SFML\Graphics\Export.hpp \
+		..\libs\SFML64\include\SFML\Config.hpp \
+		..\libs\SFML64\include\SFML\Graphics\Image.hpp \
+		..\libs\SFML64\include\SFML\Graphics\Color.hpp \
+		..\libs\SFML64\include\SFML\Graphics\Rect.hpp \
+		..\libs\SFML64\include\SFML\System\Vector2.hpp \
+		..\libs\SFML64\include\SFML\System\Vector2.inl \
+		..\libs\SFML64\include\SFML\Graphics\Rect.inl \
+		..\libs\SFML64\include\SFML\Window\GlResource.hpp \
+		..\libs\SFML64\include\SFML\Window\Export.hpp \
+		..\libs\SFML64\include\SFML\System\NonCopyable.hpp \
+		..\libs\SFML64\include\SFML\System\Export.hpp \
+		..\libs\SFML64\include\SFML\Graphics\Sprite.hpp \
+		..\libs\SFML64\include\SFML\Graphics\Drawable.hpp \
+		..\libs\SFML64\include\SFML\Graphics\RenderStates.hpp \
+		..\libs\SFML64\include\SFML\Graphics\BlendMode.hpp \
+		..\libs\SFML64\include\SFML\Graphics\Transform.hpp \
+		..\libs\SFML64\include\SFML\Graphics\Transformable.hpp \
+		..\libs\SFML64\include\SFML\Graphics\Vertex.hpp \
+		..\Cell.h \
+		..\ActiveObjects\ActiveObject.h
 
 debug\moc_MainWindow.obj: debug\moc_MainWindow.cpp 
 

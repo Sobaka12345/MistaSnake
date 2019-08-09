@@ -1,14 +1,15 @@
 #ifndef CELL_H
 #define CELL_H
 
-#include "objects/CellObject.h"
+#include "ActiveObjects/ActiveObject.h"
 
 class Cell
 {
     static unsigned int Size;
     unsigned int x, y;
 
-    CellObject * object, * activeObject;
+    CellObject * object;
+    ActiveObject * activeObject;
 
 public:
     explicit Cell();
@@ -35,7 +36,7 @@ public:
         return y;
     }
 
-    CellObject * getActiveObject()
+    ActiveObject * getActiveObject()
     {
         return activeObject;
     }
