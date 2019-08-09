@@ -8,26 +8,29 @@
 #include "objects/Stone.h"
 #include "objects/Wall.h"
 #include "objects/Ground.h"
+#include "activeObjects/Food.h"
 #include "snakes/LavaSnake.h"
-
+#include <iostream>
 
 
 class Field
 {
     static Field * p_instance;
-    unsigned int width, height, cellSize;
+    unsigned int width, height, cellSize, foodCount;
     Cell * field;
     std::allocator<Cell> fieldAllocator;
 
-    sf::Texture t_ground, t_wall, t_stone;
-    sf::Sprite s_ground, s_wall, s_stone;
+    sf::Texture t_ground, t_wall, t_stone, t_food;
+    sf::Sprite s_ground, s_wall, s_stone, s_food;
     std::vector <Snake *> snakes;
 
     std::vector<Cell *> blocked, free, food;
 
-    Field(unsigned int _width, unsigned int _height, unsigned int _size);
+    Field(unsigned int _width, unsigned int _height,
+          unsigned int _size, unsigned int _foodCount);
 public:
-    static Field * createField(unsigned int _width, unsigned int _height, unsigned int _size);
+    static Field * createField(unsigned int _width, unsigned int _height,
+                               unsigned int _size, unsigned int _foodCount);
     void update(float dt);
 
     ~Field();
@@ -35,7 +38,8 @@ public:
     void generateBorders();
     void generateWorld();
     void generateSnakes();
-    void generateFood(unsigned int max);
+    void generateFood();
+
 
     std::vector<sf::Sprite> onDraw() const
     {
@@ -47,6 +51,8 @@ public:
         for(auto x : snakes)
             for(auto y : x->getSnakeParts())
                 out.push_back(y);
+        for(auto x : food)
+            out.push_back(x->getActiveObject()->getSprite());
 
         return out;
     }

@@ -65,7 +65,8 @@ SOURCES += \
     activeObjects/SnakeHead.cpp \
     MainWindow.cpp \
     snakes/Snake.cpp \
-    snakes/LavaSnake.cpp
+    snakes/LavaSnake.cpp \
+    activeObjects/Food.cpp
 
 DISTFILES += \
         textures/wood.jpg \
@@ -73,7 +74,8 @@ DISTFILES += \
         textures/wall.png \
         textures/body.JPG \
         textures/head.bmp \
-        textures/wood_13.jpg
+        textures/wood_13.jpg \
+        textures/wine.png
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -91,7 +93,8 @@ HEADERS += \
     activeObjects/SnakeHead.h \
     MainWindow.h \
     snakes/Snake.h \
-    snakes/LavaSnake.h
+    snakes/LavaSnake.h \
+    activeObjects/Food.h
 
 FORMS += \
     MainWindow.ui

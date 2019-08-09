@@ -24,7 +24,8 @@ public:
     ~MainWindow();
 
 public slots:
-    void runGame(unsigned int width, unsigned int height, unsigned int cellSize);
+    void runGame(unsigned int width, unsigned int height, unsigned int cellSize,
+                 unsigned int foodCount, unsigned int gameSpeed);
 
 private slots:
 

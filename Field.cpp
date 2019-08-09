@@ -4,25 +4,29 @@ unsigned int Cell::Size;
 Field * Field::p_instance = nullptr;
 
 
-Field * Field::createField(unsigned int _width, unsigned int _height, unsigned int _size)
+Field * Field::createField(unsigned int _width, unsigned int _height, unsigned int _size,
+                           unsigned int _foodCount)
 {
     if(p_instance != nullptr)
         return nullptr;
 
     Cell::setSize(_size);
-    p_instance = new Field(_width, _height, _size);
+    p_instance = new Field(_width, _height, _size, _foodCount);
 
+    p_instance->setSprite("textures/wine.png", 128.0f, p_instance->t_food, p_instance->s_food);
     p_instance->setSprite("textures/wood_13.jpg", 100.0f, p_instance->t_ground, p_instance->s_ground);
     p_instance->setSprite("textures/wall.png", 360.0f,  p_instance->t_wall, p_instance->s_wall);
     p_instance->setSprite("textures/stone.bmp", 128.0f,  p_instance->t_stone, p_instance->s_stone);
     p_instance->generateBorders();
     p_instance->generateWorld();
-
     p_instance->generateSnakes();
+    p_instance->generateFood();
+
     return p_instance;
 }
 
-Field::Field(unsigned int _width, unsigned int _height, unsigned int _size)
+Field::Field(unsigned int _width, unsigned int _height, unsigned int _size, unsigned int _foodCount)
+    : foodCount(_foodCount)
 {
     width = _width;
     height = _height;
@@ -91,6 +95,22 @@ void Field::generateSnakes()///for KISA
     in.push_back(getCell(5,4));
 
     snakes.push_back(LavaSnake::createLavaSnake(in, this));
+}
+
+void Field::generateFood()
+{
+    for (unsigned int i = 0; i < width * height; i++) {
+        if(food.size() >= foodCount || field[i].getObject()->isCollidable() || field[i].getActiveObject() != nullptr)
+            continue;
+        if(rand() % 101 > 98)
+        {
+            sf::Sprite temp(s_food);
+            temp.setPosition(static_cast<float>(field[i].getX() * cellSize),
+                             static_cast<float>(field[i].getY() * cellSize));
+            field[i].setActiveObject(new Food(temp, field + i));
+            food.push_back(field + i);
+        }
+    }
 }
 
 void Field::update(float dt)

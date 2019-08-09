@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[7];
-    char stringdata0[63];
+    QByteArrayData data[9];
+    char stringdata0[83];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,11 +37,14 @@ QT_MOC_LITERAL(2, 19, 0), // ""
 QT_MOC_LITERAL(3, 20, 5), // "width"
 QT_MOC_LITERAL(4, 26, 6), // "height"
 QT_MOC_LITERAL(5, 33, 8), // "cellSize"
-QT_MOC_LITERAL(6, 42, 20) // "on_startGame_clicked"
+QT_MOC_LITERAL(6, 42, 9), // "foodCount"
+QT_MOC_LITERAL(7, 52, 9), // "gameSpeed"
+QT_MOC_LITERAL(8, 62, 20) // "on_startGame_clicked"
 
     },
     "MainWindow\0runGame\0\0width\0height\0"
-    "cellSize\0on_startGame_clicked"
+    "cellSize\0foodCount\0gameSpeed\0"
+    "on_startGame_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -59,11 +62,11 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    3,   24,    2, 0x0a /* Public */,
-       6,    0,   31,    2, 0x08 /* Private */,
+       1,    5,   24,    2, 0x0a /* Public */,
+       8,    0,   35,    2, 0x08 /* Private */,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::UInt, QMetaType::UInt, QMetaType::UInt,    3,    4,    5,
+    QMetaType::Void, QMetaType::UInt, QMetaType::UInt, QMetaType::UInt, QMetaType::UInt, QMetaType::UInt,    3,    4,    5,    6,    7,
     QMetaType::Void,
 
        0        // eod
@@ -75,7 +78,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         auto *_t = static_cast<MainWindow *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->runGame((*reinterpret_cast< uint(*)>(_a[1])),(*reinterpret_cast< uint(*)>(_a[2])),(*reinterpret_cast< uint(*)>(_a[3]))); break;
+        case 0: _t->runGame((*reinterpret_cast< uint(*)>(_a[1])),(*reinterpret_cast< uint(*)>(_a[2])),(*reinterpret_cast< uint(*)>(_a[3])),(*reinterpret_cast< uint(*)>(_a[4])),(*reinterpret_cast< uint(*)>(_a[5]))); break;
         case 1: _t->on_startGame_clicked(); break;
         default: ;
         }

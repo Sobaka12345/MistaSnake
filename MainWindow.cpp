@@ -13,10 +13,11 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::runGame(unsigned int width, unsigned int height, unsigned int cellSize)
+void MainWindow::runGame(unsigned int width, unsigned int height, unsigned int cellSize,
+                         unsigned int foodCount, unsigned int gameSpeed)
 {
 
-    Field * field = Field::createField(width, height, cellSize);
+    Field * field = Field::createField(width, height, cellSize, foodCount);
 
     window.create(sf::VideoMode(width * cellSize, height * cellSize),
                             "MistaSnake", sf::Style::Titlebar | sf::Style::Close);
@@ -41,9 +42,9 @@ void MainWindow::runGame(unsigned int width, unsigned int height, unsigned int c
         window.clear();
         for (auto x: field->onDraw())
             window.draw(x);
-        if(elapsed_1.asSeconds() > 0.1)
+        if(elapsed_1.asSeconds() > (0.5f - 0.5f * (gameSpeed / 10.0f)))
         {
-            field->update(1);
+            field->update(elapsed_1.asSeconds());
             elapsed_1 = elapsed_1.Zero;
         }
         window.display();
@@ -58,8 +59,10 @@ void MainWindow::on_startGame_clicked()
     unsigned int height = ui->height->text().toUInt();
     unsigned int width = ui->width->text().toUInt();
     unsigned int cellSize = ui->cellSize->text().toUInt();
+    unsigned int foodCount = ui->foodCount->text().toUInt();
+    unsigned int gameSpeed = ui->gameSpeed->text().toUInt();
 
-    runGame(width, height, cellSize);
+    runGame(width, height, cellSize, foodCount, gameSpeed);
 }
 
 
