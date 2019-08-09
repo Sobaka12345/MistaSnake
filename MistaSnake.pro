@@ -19,7 +19,7 @@ TARGET = MistaSnake
 linux-g++ | linux-g++-64 | linux-g++-32 {
     LIBS += -L/usr/lib/x86_64-linux-gnu
 
-    LIBS += -lsfml-audio -lsfml-graphics -lsfml-main -lsfml-network -lsfml-window -lsfml-system
+    LIBS += -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-window -lsfml-system
 }
 
 win32 {
