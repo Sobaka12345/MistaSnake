@@ -20,17 +20,38 @@ linux-g++ | linux-g++-64 | linux-g++-32 {
     LIBS += -L/usr/lib/x86_64-linux-gnu
 
     LIBS += -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-window -lsfml-system
+
+    INCLUDEPATH += "$$PWD/libs/SFML/include"
+    DEPENDPATH += "$$PWD/libs/SFML/include"
 }
 
 win32 {
-    LIBS += -L"$$PWD/libs/SFML/lib"
 
-    CONFIG(release, debug|release): LIBS += -lsfml-audio -lsfml-graphics -lsfml-main -lsfml-network -lsfml-window -lsfml-system
-    CONFIG(debug, debug|release): LIBS += -lsfml-audio-d -lsfml-graphics-d -lsfml-main-d -lsfml-network-d -lsfml-window-d -lsfml-system-d
+    !contains(QMAKE_TARGET.arch, x86_64) {
+        message("x86 build")
+
+        LIBS += -L"$$PWD/libs/SFML/lib"
+
+        CONFIG(release, debug|release): LIBS += -lsfml-audio -lsfml-graphics -lsfml-main -lsfml-network -lsfml-window -lsfml-system
+        CONFIG(debug, debug|release): LIBS += -lsfml-audio-d -lsfml-graphics-d -lsfml-main-d -lsfml-network-d -lsfml-window-d -lsfml-system-d
+
+        INCLUDEPATH += "$$PWD/libs/SFML/include"
+        DEPENDPATH += "$$PWD/libs/SFML/include"
+
+    } else {
+        message("x86_64 build")
+
+        LIBS += -L"$$PWD/libs/SFML64/lib"
+
+        CONFIG(release, debug|release): LIBS += -lsfml-audio -lsfml-graphics -lsfml-main -lsfml-network -lsfml-window -lsfml-system
+        CONFIG(debug, debug|release): LIBS += -lsfml-audio-d -lsfml-graphics-d -lsfml-main-d -lsfml-network-d -lsfml-window-d -lsfml-system-d
+
+        INCLUDEPATH += "$$PWD/libs/SFML64/include"
+        DEPENDPATH += "$$PWD/libs/SFML64/include"
+
+    }
 }
 
-INCLUDEPATH += "$$PWD/libs/SFML/include"
-DEPENDPATH += "$$PWD/libs/SFML/include"
 
 SOURCES += \
         main.cpp \
