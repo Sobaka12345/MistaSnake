@@ -1,9 +1,12 @@
 #include "Snake.h"
+#include "Field.h"
 #include <iostream>
 
 Snake::Snake(Field * _field, std::vector<Cell *>& initialPoints, sf::Texture & _head, sf::Texture & _body, float head_size, float body_size) :
+    time(0.0f),
     s_body(_body),
-    s_head(_head)
+    s_head(_head),
+    food(0), foodCounter(0)
 {
     field = _field;
     s_head.setScale(Cell::getSize() / head_size, Cell::getSize() / head_size);
@@ -15,7 +18,7 @@ Snake::Snake(Field * _field, std::vector<Cell *>& initialPoints, sf::Texture & _
                      float(initialPoints.back()->getY() * Cell::getSize()));
 
     snake.push_back(new SnakeHead(temp, initialPoints.back()));
-    headPosition = initialPoints.back();
+    head = initialPoints.back()->getActiveObject();
     initialPoints.pop_back();
 
     while(!initialPoints.empty())
@@ -37,13 +40,32 @@ Snake::~Snake()
 
 void Snake::update(float dt)
 {
-    direction  = tick(dt);
-    move(float(Cell::getSize()));
+    if(food >= 1)
+    {
+        if(addPart())
+            food--;
+    }
+    direction.push_back(tick(dt));
+    time += dt;
+    if(time >= 0.3f)
+    {
+        move(float(Cell::getSize()));
+        time = 0;
+    }
 }
 
 void Snake::move(float step)
 {
-    switch(direction)
+    DIR dir = direction.back();
+    if(dir == NO)
+        for(auto it = direction.rbegin(); it != direction.rend(); it++)
+            if(*it != NO)
+            {
+                dir = *it;
+                break;
+            }
+
+    switch(dir)
     {
         case UP :
                 moveParts(0, -1, step);
@@ -62,6 +84,7 @@ void Snake::move(float step)
             break;
         default: ;
     }
+    direction.clear();
 }
 
 void Snake::moveParts(int _x, int _y, float & step)
@@ -73,6 +96,13 @@ void Snake::moveParts(int _x, int _y, float & step)
         {
             if(x == snake.begin()) {
                 temp = (*x)->getPosition();
+                ActiveObject * tempObj = field->getCell(temp->getX() + _x, temp->getY() + _y)->getActiveObject();
+                if(tempObj != nullptr && tempObj->is_food())
+                {
+                    field->deleteFood(tempObj);
+                    food++;
+                    foodCounter++;
+                }
                 (*x)->movePart(_x, _y, step, field);
             }
             else {
@@ -87,6 +117,13 @@ void Snake::moveParts(int _x, int _y, float & step)
         {
             if(x == snake.rbegin()) {
                 temp = (*x)->getPosition();
+                ActiveObject * tempObj = field->getCell(temp->getX() + _x, temp->getY() + _y)->getActiveObject();
+                if(tempObj != nullptr && tempObj->is_food())
+                {
+                    field->deleteFood(tempObj);
+                    food++;
+                    foodCounter++;
+                }
                 (*x)->movePart(_x, _y, step, field);
             }
             else {
@@ -115,6 +152,7 @@ void Snake::reverse()
         temp.setPosition(float(pos->getX() * Cell::getSize()),
                          float(pos->getY() * Cell::getSize()));
         snake.back() = new SnakeHead(temp, pos);
+        head = snake.back();
     } else
     {
         Cell * pos = snake.back()->getPosition();
@@ -129,7 +167,35 @@ void Snake::reverse()
         temp.setPosition(float(pos->getX() * Cell::getSize()),
                          float(pos->getY() * Cell::getSize()));
         snake.front() = new SnakeHead(temp, pos);
+        head = snake.front();
     }
 }
 
+bool Snake::addPart()
+{
+    Cell * newPos = nullptr;
+    Cell * sec = nullptr;
+    Cell * fir = nullptr;
+    if(head == snake.front())
+    {
+        sec = (*(snake.end() - 2))->getPosition();
+        fir = snake.back()->getPosition();
+    } else {
+        sec = (*(snake.begin() + 1))->getPosition();
+        fir = snake.front()->getPosition();
+    }
+    newPos = field->getCell(fir->getX() + fir->getX() - sec->getX(),
+                       fir->getY() + fir->getY() - sec->getY());
+    if(newPos->getObject()->isCollidable())
+        return false;
+
+    sf::Sprite temp(s_body);
+    temp.setPosition(newPos->getX() * Cell::getSize(), newPos->getY() * Cell::getSize());
+    if(head == snake.front())
+        snake.push_back(new SnakePart(temp, newPos));
+    else
+        snake.insert(snake.begin(), new SnakePart(temp, newPos));
+
+    return true;
+}
 

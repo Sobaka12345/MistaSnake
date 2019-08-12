@@ -1,6 +1,7 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -25,11 +26,9 @@ void MainWindow::runGame(unsigned int width, unsigned int height, unsigned int c
     parentClose = false;
 
     sf::Clock clock;
-    sf::Time elapsed_1;
+    sf::Time elapsed;
     while (window.isOpen())
     {
-        sf::Time elapsed = clock.restart();
-        elapsed_1 += elapsed;
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -42,11 +41,9 @@ void MainWindow::runGame(unsigned int width, unsigned int height, unsigned int c
         window.clear();
         for (auto x: field->onDraw())
             window.draw(x);
-        if(elapsed_1.asSeconds() > (0.5f - 0.5f * (gameSpeed / 10.0f)))
-        {
-            field->update(elapsed_1.asSeconds());
-            elapsed_1 = elapsed_1.Zero;
-        }
+
+        field->update(elapsed.asSeconds());
+        elapsed = clock.restart();
         window.display();
     }
 
@@ -70,4 +67,27 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
     Q_UNUSED(event);
     parentClose = true;
+}
+
+
+void MainWindow::on_connectButton_clicked()
+{
+   // ui->connectButton->setEnabled(false);
+}
+
+void MainWindow::connectToServer(const char * ip)
+{
+}
+
+
+void MainWindow::on_createButton_clicked()
+{
+    ui->connectButton->setEnabled(false);
+    serverBox.show();
+    serverBox.listenClients();
+}
+
+void MainWindow::setButtonEnabled()
+{
+    ui->connectButton->setEnabled(false);
 }

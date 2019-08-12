@@ -1,5 +1,6 @@
 QT += gui
 QT += widgets
+QT += network
 
 CONFIG += c++14 console
 CONFIG -= app_bundle
@@ -8,7 +9,7 @@ CONFIG -= app_bundle
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
-DEFINES += QT_DEPRECATED_WARNINGS
+# DEFINES += QT_DEPRECATED_WARNINGS
 
 # You can also make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -67,7 +68,9 @@ SOURCES += \
     snakes/Snake.cpp \
     snakes/LavaSnake.cpp \
     activeObjects/Food.cpp \
-    activeObjects/ActiveObject.cpp
+    activeObjects/ActiveObject.cpp \
+    snakes/UserSnake.cpp \
+    ServerListForm.cpp
 
 DISTFILES += \
         textures/wood.jpg \
@@ -96,9 +99,12 @@ HEADERS += \
     snakes/Snake.h \
     snakes/LavaSnake.h \
     activeObjects/Food.h \
-    activeObjects/ActiveObject.h
+    activeObjects/ActiveObject.h \
+    snakes/UserSnake.h \
+    ServerListForm.h
 
 FORMS += \
-    MainWindow.ui
+    MainWindow.ui \
+    ServerListForm.ui
 
 

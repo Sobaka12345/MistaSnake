@@ -36,7 +36,7 @@ public:
         return y;
     }
 
-    ActiveObject * getActiveObject()
+    ActiveObject * getActiveObject() const
     {
         return activeObject;
     }

@@ -9,9 +9,9 @@ class LavaSnake : public Snake
 protected:
     LavaSnake(Field * _field, std::vector<Cell *> & initialPoints, sf::Texture & _head,
               sf::Texture & _body, float head_size, float body_size);
+    virtual DIR tick(float dt) override;
 public:
     static LavaSnake * createLavaSnake(std::vector<Cell *> & initialPoints, Field * _field);
-    virtual DIR tick(float dt) override;
 
 };
 

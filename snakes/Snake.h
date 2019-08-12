@@ -17,26 +17,28 @@ protected:
         NO = -1
     } DIR;
 
+    float time;
     Field * field;
     std::vector<SnakePart *> snake;
-    Cell * headPosition;
+    ActiveObject * head;
     sf::Sprite s_body, s_head;
-    DIR direction;
+    unsigned int food, foodCounter;
 
     explicit Snake(Field * _field, std::vector<Cell *> & initialPoints, sf::Texture & _body, sf::Texture & _head, float head_size, float body_size);
     void move(float step);
     void moveParts(int _x, int _y, float & step);
     void reverse();
-
-public:
-    virtual ~Snake();
-    void update(float dt);
+    bool addPart();
 
     virtual DIR tick(float dt)
     {
         (void)(dt);
         return static_cast<DIR>(rand() % 5 - 1);
     }
+public:
+    virtual ~Snake();
+    void update(float dt);
+
 
     std::vector<sf::Sprite> getSnakeParts() const
     {
@@ -45,6 +47,8 @@ public:
             out.push_back(x->getSprite());
         return out;
     }
+private:
+    std::vector<DIR> direction;
 };
 
 #endif // SNAKE_H

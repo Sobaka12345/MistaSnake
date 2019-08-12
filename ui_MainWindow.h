@@ -13,11 +13,10 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QListView>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
@@ -29,10 +28,7 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QPushButton *startGame;
-    QScrollArea *scrollArea;
-    QWidget *scrollAreaWidgetContents;
-    QListView *listView;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QGridLayout *gridLayout;
     QLabel *label;
     QLabel *label_2;
@@ -44,6 +40,9 @@ public:
     QSpinBox *cellSize;
     QSpinBox *foodCount;
     QSpinBox *gameSpeed;
+    QPushButton *connectButton;
+    QPushButton *createButton;
+    QLineEdit *lineEdit;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -52,8 +51,11 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->resize(480, 389);
+        MainWindow->setStyleSheet(QString::fromUtf8(""));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
+        centralwidget->setEnabled(true);
+        centralwidget->setAutoFillBackground(false);
         startGame = new QPushButton(centralwidget);
         startGame->setObjectName(QString::fromUtf8("startGame"));
         startGame->setGeometry(QRect(100, 220, 291, 111));
@@ -62,49 +64,38 @@ public:
         font.setPointSize(48);
         startGame->setFont(font);
         startGame->setCursor(QCursor(Qt::OpenHandCursor));
-        scrollArea = new QScrollArea(centralwidget);
-        scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
-        scrollArea->setGeometry(QRect(0, 0, 201, 121));
-        scrollArea->setWidgetResizable(true);
-        scrollAreaWidgetContents = new QWidget();
-        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 199, 119));
-        listView = new QListView(scrollAreaWidgetContents);
-        listView->setObjectName(QString::fromUtf8("listView"));
-        listView->setGeometry(QRect(0, 0, 201, 121));
-        scrollArea->setWidget(scrollAreaWidgetContents);
-        widget = new QWidget(centralwidget);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(20, 130, 441, 61));
-        gridLayout = new QGridLayout(widget);
+        layoutWidget = new QWidget(centralwidget);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(10, 140, 451, 61));
+        gridLayout = new QGridLayout(layoutWidget);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
-        label = new QLabel(widget);
+        label = new QLabel(layoutWidget);
         label->setObjectName(QString::fromUtf8("label"));
 
         gridLayout->addWidget(label, 0, 0, 1, 1);
 
-        label_2 = new QLabel(widget);
+        label_2 = new QLabel(layoutWidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
 
         gridLayout->addWidget(label_2, 0, 1, 1, 1);
 
-        label_3 = new QLabel(widget);
+        label_3 = new QLabel(layoutWidget);
         label_3->setObjectName(QString::fromUtf8("label_3"));
 
         gridLayout->addWidget(label_3, 0, 2, 1, 1);
 
-        label_4 = new QLabel(widget);
+        label_4 = new QLabel(layoutWidget);
         label_4->setObjectName(QString::fromUtf8("label_4"));
 
         gridLayout->addWidget(label_4, 0, 3, 1, 1);
 
-        label_5 = new QLabel(widget);
+        label_5 = new QLabel(layoutWidget);
         label_5->setObjectName(QString::fromUtf8("label_5"));
 
         gridLayout->addWidget(label_5, 0, 4, 1, 1);
 
-        width = new QSpinBox(widget);
+        width = new QSpinBox(layoutWidget);
         width->setObjectName(QString::fromUtf8("width"));
         QFont font1;
         font1.setFamily(QString::fromUtf8("Roboto Bk"));
@@ -114,7 +105,7 @@ public:
 
         gridLayout->addWidget(width, 1, 0, 1, 1);
 
-        height = new QSpinBox(widget);
+        height = new QSpinBox(layoutWidget);
         height->setObjectName(QString::fromUtf8("height"));
         height->setFont(font1);
         height->setMaximum(100);
@@ -122,7 +113,7 @@ public:
 
         gridLayout->addWidget(height, 1, 1, 1, 1);
 
-        cellSize = new QSpinBox(widget);
+        cellSize = new QSpinBox(layoutWidget);
         cellSize->setObjectName(QString::fromUtf8("cellSize"));
         cellSize->setFont(font1);
         cellSize->setMaximum(50);
@@ -130,7 +121,7 @@ public:
 
         gridLayout->addWidget(cellSize, 1, 2, 1, 1);
 
-        foodCount = new QSpinBox(widget);
+        foodCount = new QSpinBox(layoutWidget);
         foodCount->setObjectName(QString::fromUtf8("foodCount"));
         foodCount->setFont(font1);
         foodCount->setMinimum(1);
@@ -139,7 +130,7 @@ public:
 
         gridLayout->addWidget(foodCount, 1, 3, 1, 1);
 
-        gameSpeed = new QSpinBox(widget);
+        gameSpeed = new QSpinBox(layoutWidget);
         gameSpeed->setObjectName(QString::fromUtf8("gameSpeed"));
         gameSpeed->setFont(font1);
         gameSpeed->setMinimum(1);
@@ -148,6 +139,20 @@ public:
 
         gridLayout->addWidget(gameSpeed, 1, 4, 1, 1);
 
+        connectButton = new QPushButton(centralwidget);
+        connectButton->setObjectName(QString::fromUtf8("connectButton"));
+        connectButton->setEnabled(true);
+        connectButton->setGeometry(QRect(220, 0, 111, 31));
+        createButton = new QPushButton(centralwidget);
+        createButton->setObjectName(QString::fromUtf8("createButton"));
+        createButton->setGeometry(QRect(220, 40, 111, 31));
+        lineEdit = new QLineEdit(centralwidget);
+        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
+        lineEdit->setGeometry(QRect(10, 0, 191, 31));
+        QFont font2;
+        font2.setPointSize(16);
+        lineEdit->setFont(font2);
+        lineEdit->setAutoFillBackground(false);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -171,6 +176,19 @@ public:
         label_3->setText(QApplication::translate("MainWindow", "\320\240\320\260\320\267\320\274\320\265\321\200 \320\272\320\273\320\265\321\202\320\272\320\270", nullptr));
         label_4->setText(QApplication::translate("MainWindow", "\320\232\320\276\320\273\320\270\321\207\320\265\321\201\321\202\320\262\320\276 \320\265\320\264\321\213", nullptr));
         label_5->setText(QApplication::translate("MainWindow", "\320\241\320\272\320\276\321\200\320\276\321\201\321\202\321\214 \320\270\320\263\321\200\321\213", nullptr));
+        connectButton->setText(QApplication::translate("MainWindow", "\320\237\320\276\320\264\320\272\320\273\321\216\321\207\320\270\321\202\321\214\321\201\321\217", nullptr));
+        createButton->setText(QApplication::translate("MainWindow", "\320\241\320\276\320\267\320\264\320\260\321\202\321\214 \321\201\320\265\321\200\320\262\320\265\321\200", nullptr));
+#ifndef QT_NO_TOOLTIP
+        lineEdit->setToolTip(QString());
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_STATUSTIP
+        lineEdit->setStatusTip(QString());
+#endif // QT_NO_STATUSTIP
+#ifndef QT_NO_ACCESSIBILITY
+        lineEdit->setAccessibleDescription(QString());
+#endif // QT_NO_ACCESSIBILITY
+        lineEdit->setText(QString());
+        lineEdit->setPlaceholderText(QApplication::translate("MainWindow", "ip address", nullptr));
     } // retranslateUi
 
 };

@@ -241,6 +241,7 @@ Makefile: ..\MistaSnake.pro D:\QT\5.12.1\msvc2017_64\mkspecs\win32-msvc\qmake.co
 		D:\QT\5.12.1\msvc2017_64\mkspecs\features\qt_config.prf \
 		D:\QT\5.12.1\msvc2017_64\mkspecs\win32-msvc\qmake.conf \
 		D:\QT\5.12.1\msvc2017_64\mkspecs\features\spec_post.prf \
+		.qmake.stash \
 		D:\QT\5.12.1\msvc2017_64\mkspecs\features\exclusive_builds.prf \
 		D:\QT\5.12.1\msvc2017_64\mkspecs\common\msvc-version.conf \
 		D:\QT\5.12.1\msvc2017_64\mkspecs\features\toolchain.prf \
@@ -267,6 +268,7 @@ Makefile: ..\MistaSnake.pro D:\QT\5.12.1\msvc2017_64\mkspecs\win32-msvc\qmake.co
 		..\MistaSnake.pro \
 		D:\QT\5.12.1\msvc2017_64\lib\Qt5Widgets.prl \
 		D:\QT\5.12.1\msvc2017_64\lib\Qt5Gui.prl \
+		D:\QT\5.12.1\msvc2017_64\lib\Qt5Network.prl \
 		D:\QT\5.12.1\msvc2017_64\lib\Qt5Core.prl
 	$(QMAKE) -o Makefile ..\MistaSnake.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"
 D:\QT\5.12.1\msvc2017_64\mkspecs\features\spec_pre.prf:
@@ -433,6 +435,7 @@ D:\QT\5.12.1\msvc2017_64\mkspecs\features\qt_functions.prf:
 D:\QT\5.12.1\msvc2017_64\mkspecs\features\qt_config.prf:
 D:\QT\5.12.1\msvc2017_64\mkspecs\win32-msvc\qmake.conf:
 D:\QT\5.12.1\msvc2017_64\mkspecs\features\spec_post.prf:
+.qmake.stash:
 D:\QT\5.12.1\msvc2017_64\mkspecs\features\exclusive_builds.prf:
 D:\QT\5.12.1\msvc2017_64\mkspecs\common\msvc-version.conf:
 D:\QT\5.12.1\msvc2017_64\mkspecs\features\toolchain.prf:
@@ -459,6 +462,7 @@ D:\QT\5.12.1\msvc2017_64\mkspecs\features\lex.prf:
 ..\MistaSnake.pro:
 D:\QT\5.12.1\msvc2017_64\lib\Qt5Widgets.prl:
 D:\QT\5.12.1\msvc2017_64\lib\Qt5Gui.prl:
+D:\QT\5.12.1\msvc2017_64\lib\Qt5Network.prl:
 D:\QT\5.12.1\msvc2017_64\lib\Qt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\MistaSnake.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"

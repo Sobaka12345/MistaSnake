@@ -88,7 +88,7 @@ void Field::generateSnakes()///for KISA
     in.push_back(getCell(2,3));
     in.push_back(getCell(2,4));
 
-    snakes.push_back(LavaSnake::createLavaSnake(in, this));
+    snakes.push_back(UserSnake::createUserSnake(in, this));
 
     in.push_back(getCell(5,2));
     in.push_back(getCell(5,3));
@@ -97,7 +97,7 @@ void Field::generateSnakes()///for KISA
     snakes.push_back(LavaSnake::createLavaSnake(in, this));
 }
 
-void Field::generateFood()
+void Field::generateFood() ///for KISA
 {
     for (unsigned int i = 0; i < width * height; i++) {
         if(food.size() >= foodCount || field[i].getObject()->isCollidable() || field[i].getActiveObject() != nullptr)
@@ -117,4 +117,18 @@ void Field::update(float dt)
 {
     for(auto x: snakes)
         x->update(dt);
+}
+
+void Field::deleteFood(ActiveObject * el)
+{
+    for (auto it = food.begin(); it != food.end(); ) {
+       if( (*it)->getActiveObject() ==  el) {
+          delete (*it)->getActiveObject();
+          (*it)->destroyActiveObject();
+          it = food.erase(it);
+       }
+       else {
+          ++it;
+       }
+    }
 }

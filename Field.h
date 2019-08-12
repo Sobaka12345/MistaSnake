@@ -10,6 +10,7 @@
 #include "objects/Ground.h"
 #include "activeObjects/Food.h"
 #include "snakes/LavaSnake.h"
+#include "snakes/UserSnake.h"
 #include <iostream>
 
 
@@ -39,6 +40,7 @@ public:
     void generateWorld();
     void generateSnakes();
     void generateFood();
+    void deleteFood(ActiveObject * el);
 
 
     std::vector<sf::Sprite> onDraw() const
@@ -55,6 +57,21 @@ public:
             out.push_back(x->getActiveObject()->getSprite());
 
         return out;
+    }
+
+    std::vector<Cell*> & getBlocked()
+    {
+        return blocked;
+    }
+
+    std::vector<Cell*> & getFree()
+    {
+        return free;
+    }
+
+    std::vector<Cell*> & getFood()
+    {
+        return food;
     }
 
 

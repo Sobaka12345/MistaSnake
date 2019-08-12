@@ -5,4 +5,5 @@ ActiveObject::ActiveObject(sf::Sprite _sprite, bool _collidable , Cell * _positi
     : CellObject (_sprite, _collidable)
 {
     position = _position;
+    _is_food = false;
 }

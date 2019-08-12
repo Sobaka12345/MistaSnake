@@ -15,7 +15,7 @@ void SnakePart::movePart(int dx, int dy, float step, Field * field)
 
     Cell * temp = field->getCell(x + dx, y + dy);
 
-    if((temp->getActiveObject() != nullptr && temp->getActiveObject()->isCollidable())
+    if((temp->getActiveObject() != nullptr && (temp->getActiveObject()->isCollidable() || temp->getActiveObject()->is_food()))
             || temp->getObject()->isCollidable())
             return;
 
