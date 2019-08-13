@@ -26,14 +26,18 @@ void ServerListForm::slotNewConnection()
     connect(pClientSocket, SIGNAL(readyRead()),
             this,          SLOT(slotReadClient())
            );
+    connect(pClientSocket, SIGNAL(connected()),
+            pClientSocket, SLOT(sendPlayersInfo()));
+}
 
-
+void ServerListForm::sendPlayersInfo()
+{
+    QTcpSocket* pClientSocket = (QTcpSocket*)sender();
     QString out;
     for(auto x : players)
         out += x + '\n';
     pClientSocket->write(out.toUtf8());
 }
-
 
 void ServerListForm::slotReadClient()
 {
@@ -95,12 +99,15 @@ void ServerListForm::connectToServer(QString ip, QString name)
 
 }
 
+#include <iostream>
+
 void ServerListForm::readServer()
 {
     QStringList list;
     while (serverSocket.canReadLine())
     {
         QString data = QString(serverSocket.readLine());
+        std::cout << data.toStdString() << std::endl;
         list.append(data);
     }
 }

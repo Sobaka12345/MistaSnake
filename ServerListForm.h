@@ -28,6 +28,7 @@ public slots:
             void listenClients     ();
             void serverDisconnected();
             void readServer        ();
+            void sendPlayersInfo   ();
 
 private:
             void closeEvent(QCloseEvent * event) override;
