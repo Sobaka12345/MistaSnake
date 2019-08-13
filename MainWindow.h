@@ -39,11 +39,11 @@ public slots:
 
 private slots:
 
-    void on_startGame_clicked();
+    void on_startGame_clicked    ();
 
     void on_connectButton_clicked();
 
-    void on_createButton_clicked();
+    void on_createButton_clicked ();
 
 private:
     Ui::MainWindow *ui;
@@ -51,7 +51,6 @@ private:
     sf::RenderWindow window;
     QStringListModel servers;
     ServerListForm serverBox;
-    void connectToServer(const char * ip);
 
     bool parentClose;
 

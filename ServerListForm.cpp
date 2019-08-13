@@ -2,12 +2,18 @@
 #include "ui_ServerListForm.h"
 
 
-ServerListForm::ServerListForm(QWidget *parent) :
-    QScrollArea(parent),
+ServerListForm::ServerListForm(QWidget * owner, QWidget *parent) :
+    QWidget(parent),
     ui(new Ui::ServerListForm)
 {
     ui->setupUi(this);
     server = nullptr;
+    connect(this, SIGNAL(closeBox()), owner, SLOT(setButtonEnabled()));
+}
+
+void ServerListForm::serverDisconnected()
+{
+    this->close();
 }
 
 void ServerListForm::slotNewConnection()
@@ -21,15 +27,11 @@ void ServerListForm::slotNewConnection()
             this,          SLOT(slotReadClient())
            );
 
-    QByteArray  arrBlock;
-    QDataStream out(&arrBlock, QIODevice::WriteOnly);
-    out.setVersion(QDataStream::Qt_4_2);
-    out << quint16(0) << "AAAAQ" ;
 
-    out.device()->seek(0);
-    out << quint16(arrBlock.size() - sizeof(quint16));
-
-    pClientSocket->write(arrBlock);
+    QString out;
+    for(auto x : players)
+        out += x + '\n';
+    pClientSocket->write(out.toUtf8());
 }
 
 
@@ -37,13 +39,16 @@ void ServerListForm::slotReadClient()
 {
     QTcpSocket* clientSocket = (QTcpSocket*)sender();
 
-    char data[100];
-    clientSocket->read(data, 100);
+    QString in(clientSocket->read(100));
+    players.insert(clientSocket, in);
 }
 
 void ServerListForm::closeEvent(QCloseEvent * event)
 {
     Q_UNUSED(event);
+    players.clear();
+    if(serverSocket.state() == QTcpSocket::SocketState::ConnectedState)
+        serverSocket.disconnectFromHost();
     for(auto it = clients.begin(); it != clients.end(); it++)
     {
         (*it)->disconnectFromHost();
@@ -51,8 +56,10 @@ void ServerListForm::closeEvent(QCloseEvent * event)
     }
     clients.clear();
 
-    if(server->isListening())
-        server->close();
+    if(server != nullptr)
+        if(server->isListening())
+            server->close();
+    emit closeBox();
 }
 
 void ServerListForm::listenClients()
@@ -72,8 +79,37 @@ void ServerListForm::listenClients()
                );
 }
 
+void ServerListForm::connectToServer(QString ip, QString name)
+{
+    connect(&serverSocket, SIGNAL(disconnected()),
+            this, SLOT(serverDisconnected()));
+    connect(&serverSocket, SIGNAL(readyRead()),
+            this, SLOT(readServer()));
+    serverSocket.connectToHost(ip, 32280);
+    if(serverSocket.waitForConnected(3000)) {
+        serverSocket.write(name.toUtf8());
+    }
+    else {
+        emit serverSocket.disconnected();
+    }
+
+}
+
+void ServerListForm::readServer()
+{
+    QStringList list;
+    while (serverSocket.canReadLine())
+    {
+        QString data = QString(serverSocket.readLine());
+        list.append(data);
+    }
+}
+
 ServerListForm::~ServerListForm()
 {
+    players.clear();
+    if(serverSocket.state() == QTcpSocket::SocketState::ConnectedState)
+        serverSocket.disconnectFromHost();
     for(auto it = clients.begin(); it != clients.end(); it++)
     {
         (*it)->disconnectFromHost();

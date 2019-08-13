@@ -531,7 +531,6 @@ debug\moc_MainWindow.cpp: ..\MainWindow.h \
 		..\objects\Ground.h \
 		..\activeObjects\Food.h \
 		..\Cell.h \
-		..\ActiveObjects\ActiveObject.h \
 		..\activeObjects\ActiveObject.h \
 		..\snakes\LavaSnake.h \
 		..\snakes\Snake.h \
@@ -984,7 +983,6 @@ debug\main.obj: ..\main.cpp D:\QT\5.12.1\msvc2017_64\include\QtWidgets\QApplicat
 		..\objects\Ground.h \
 		..\activeObjects\Food.h \
 		..\Cell.h \
-		..\ActiveObjects\ActiveObject.h \
 		..\activeObjects\ActiveObject.h \
 		..\snakes\LavaSnake.h \
 		..\snakes\Snake.h \
@@ -1032,7 +1030,6 @@ debug\Field.obj: ..\Field.cpp ..\Field.h \
 		..\objects\Ground.h \
 		..\activeObjects\Food.h \
 		..\Cell.h \
-		..\ActiveObjects\ActiveObject.h \
 		..\activeObjects\ActiveObject.h \
 		..\snakes\LavaSnake.h \
 		..\snakes\Snake.h \
@@ -1110,7 +1107,7 @@ debug\Wall.obj: ..\objects\Wall.cpp ..\objects\Wall.h \
 		..\libs\SFML64\include\SFML\Graphics\Vertex.hpp
 
 debug\Cell.obj: ..\Cell.cpp ..\Cell.h \
-		..\ActiveObjects\ActiveObject.h \
+		..\activeObjects\ActiveObject.h \
 		..\objects\CellObject.h \
 		..\libs\SFML64\include\SFML\Graphics\Texture.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Export.hpp \
@@ -1158,7 +1155,7 @@ debug\Ground.obj: ..\objects\Ground.cpp ..\objects\Ground.h \
 
 debug\SnakePart.obj: ..\activeObjects\SnakePart.cpp ..\activeObjects\SnakePart.h \
 		..\Cell.h \
-		..\ActiveObjects\ActiveObject.h \
+		..\activeObjects\ActiveObject.h \
 		..\objects\CellObject.h \
 		..\libs\SFML64\include\SFML\Graphics\Texture.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Export.hpp \
@@ -1180,7 +1177,6 @@ debug\SnakePart.obj: ..\activeObjects\SnakePart.cpp ..\activeObjects\SnakePart.h
 		..\libs\SFML64\include\SFML\Graphics\Transform.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Transformable.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Vertex.hpp \
-		..\activeObjects\ActiveObject.h \
 		..\Field.h \
 		..\objects\Stone.h \
 		..\objects\Wall.h \
@@ -1195,7 +1191,7 @@ debug\SnakePart.obj: ..\activeObjects\SnakePart.cpp ..\activeObjects\SnakePart.h
 debug\SnakeHead.obj: ..\activeObjects\SnakeHead.cpp ..\activeObjects\SnakeHead.h \
 		..\activeObjects\SnakePart.h \
 		..\Cell.h \
-		..\ActiveObjects\ActiveObject.h \
+		..\activeObjects\ActiveObject.h \
 		..\objects\CellObject.h \
 		..\libs\SFML64\include\SFML\Graphics\Texture.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Export.hpp \
@@ -1216,8 +1212,7 @@ debug\SnakeHead.obj: ..\activeObjects\SnakeHead.cpp ..\activeObjects\SnakeHead.h
 		..\libs\SFML64\include\SFML\Graphics\BlendMode.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Transform.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Transformable.hpp \
-		..\libs\SFML64\include\SFML\Graphics\Vertex.hpp \
-		..\activeObjects\ActiveObject.h
+		..\libs\SFML64\include\SFML\Graphics\Vertex.hpp
 
 debug\MainWindow.obj: ..\MainWindow.cpp ..\MainWindow.h \
 		D:\QT\5.12.1\msvc2017_64\include\QtWidgets\QMainWindow \
@@ -1453,7 +1448,6 @@ debug\MainWindow.obj: ..\MainWindow.cpp ..\MainWindow.h \
 		..\objects\Ground.h \
 		..\activeObjects\Food.h \
 		..\Cell.h \
-		..\ActiveObjects\ActiveObject.h \
 		..\activeObjects\ActiveObject.h \
 		..\snakes\LavaSnake.h \
 		..\snakes\Snake.h \
@@ -1511,7 +1505,7 @@ debug\Snake.obj: ..\snakes\Snake.cpp ..\snakes\Snake.h \
 		..\activeObjects\SnakeHead.h \
 		..\activeObjects\SnakePart.h \
 		..\Cell.h \
-		..\ActiveObjects\ActiveObject.h \
+		..\activeObjects\ActiveObject.h \
 		..\objects\CellObject.h \
 		..\libs\SFML64\include\SFML\Graphics\Texture.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Export.hpp \
@@ -1533,7 +1527,6 @@ debug\Snake.obj: ..\snakes\Snake.cpp ..\snakes\Snake.h \
 		..\libs\SFML64\include\SFML\Graphics\Transform.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Transformable.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Vertex.hpp \
-		..\activeObjects\ActiveObject.h \
 		..\Field.h \
 		..\objects\Stone.h \
 		..\objects\Wall.h \
@@ -1548,7 +1541,7 @@ debug\LavaSnake.obj: ..\snakes\LavaSnake.cpp ..\snakes\LavaSnake.h \
 		..\activeObjects\SnakeHead.h \
 		..\activeObjects\SnakePart.h \
 		..\Cell.h \
-		..\ActiveObjects\ActiveObject.h \
+		..\activeObjects\ActiveObject.h \
 		..\objects\CellObject.h \
 		..\libs\SFML64\include\SFML\Graphics\Texture.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Export.hpp \
@@ -1569,12 +1562,11 @@ debug\LavaSnake.obj: ..\snakes\LavaSnake.cpp ..\snakes\LavaSnake.h \
 		..\libs\SFML64\include\SFML\Graphics\BlendMode.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Transform.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Transformable.hpp \
-		..\libs\SFML64\include\SFML\Graphics\Vertex.hpp \
-		..\activeObjects\ActiveObject.h
+		..\libs\SFML64\include\SFML\Graphics\Vertex.hpp
 
 debug\Food.obj: ..\activeObjects\Food.cpp ..\activeObjects\Food.h \
 		..\Cell.h \
-		..\ActiveObjects\ActiveObject.h \
+		..\activeObjects\ActiveObject.h \
 		..\objects\CellObject.h \
 		..\libs\SFML64\include\SFML\Graphics\Texture.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Export.hpp \
@@ -1595,8 +1587,7 @@ debug\Food.obj: ..\activeObjects\Food.cpp ..\activeObjects\Food.h \
 		..\libs\SFML64\include\SFML\Graphics\BlendMode.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Transform.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Transformable.hpp \
-		..\libs\SFML64\include\SFML\Graphics\Vertex.hpp \
-		..\activeObjects\ActiveObject.h
+		..\libs\SFML64\include\SFML\Graphics\Vertex.hpp
 
 debug\ActiveObject.obj: ..\activeObjects\ActiveObject.cpp ..\activeObjects\ActiveObject.h \
 		..\objects\CellObject.h \
@@ -1620,15 +1611,14 @@ debug\ActiveObject.obj: ..\activeObjects\ActiveObject.cpp ..\activeObjects\Activ
 		..\libs\SFML64\include\SFML\Graphics\Transform.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Transformable.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Vertex.hpp \
-		..\Cell.h \
-		..\ActiveObjects\ActiveObject.h
+		..\Cell.h
 
 debug\UserSnake.obj: ..\snakes\UserSnake.cpp ..\snakes\UserSnake.h \
 		..\snakes\Snake.h \
 		..\activeObjects\SnakeHead.h \
 		..\activeObjects\SnakePart.h \
 		..\Cell.h \
-		..\ActiveObjects\ActiveObject.h \
+		..\activeObjects\ActiveObject.h \
 		..\objects\CellObject.h \
 		..\libs\SFML64\include\SFML\Graphics\Texture.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Export.hpp \
@@ -1650,7 +1640,6 @@ debug\UserSnake.obj: ..\snakes\UserSnake.cpp ..\snakes\UserSnake.h \
 		..\libs\SFML64\include\SFML\Graphics\Transform.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Transformable.hpp \
 		..\libs\SFML64\include\SFML\Graphics\Vertex.hpp \
-		..\activeObjects\ActiveObject.h \
 		..\libs\SFML64\include\SFML\Window\Keyboard.hpp
 
 debug\ServerListForm.obj: ..\ServerListForm.cpp ..\ServerListForm.h \

@@ -40,9 +40,12 @@ public:
     QSpinBox *cellSize;
     QSpinBox *foodCount;
     QSpinBox *gameSpeed;
+    QWidget *layoutWidget1;
+    QGridLayout *gridLayout_2;
+    QLineEdit *ipEdit;
     QPushButton *connectButton;
+    QLineEdit *playerEdit;
     QPushButton *createButton;
-    QLineEdit *lineEdit;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -139,20 +142,39 @@ public:
 
         gridLayout->addWidget(gameSpeed, 1, 4, 1, 1);
 
-        connectButton = new QPushButton(centralwidget);
-        connectButton->setObjectName(QString::fromUtf8("connectButton"));
-        connectButton->setEnabled(true);
-        connectButton->setGeometry(QRect(220, 0, 111, 31));
-        createButton = new QPushButton(centralwidget);
-        createButton->setObjectName(QString::fromUtf8("createButton"));
-        createButton->setGeometry(QRect(220, 40, 111, 31));
-        lineEdit = new QLineEdit(centralwidget);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        lineEdit->setGeometry(QRect(10, 0, 191, 31));
+        layoutWidget1 = new QWidget(centralwidget);
+        layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(10, 0, 281, 81));
+        gridLayout_2 = new QGridLayout(layoutWidget1);
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        gridLayout_2->setContentsMargins(0, 0, 0, 0);
+        ipEdit = new QLineEdit(layoutWidget1);
+        ipEdit->setObjectName(QString::fromUtf8("ipEdit"));
         QFont font2;
         font2.setPointSize(16);
-        lineEdit->setFont(font2);
-        lineEdit->setAutoFillBackground(false);
+        ipEdit->setFont(font2);
+        ipEdit->setAutoFillBackground(false);
+
+        gridLayout_2->addWidget(ipEdit, 0, 0, 1, 1);
+
+        connectButton = new QPushButton(layoutWidget1);
+        connectButton->setObjectName(QString::fromUtf8("connectButton"));
+        connectButton->setEnabled(true);
+
+        gridLayout_2->addWidget(connectButton, 0, 1, 1, 1);
+
+        playerEdit = new QLineEdit(layoutWidget1);
+        playerEdit->setObjectName(QString::fromUtf8("playerEdit"));
+        playerEdit->setFont(font2);
+        playerEdit->setAutoFillBackground(false);
+
+        gridLayout_2->addWidget(playerEdit, 1, 0, 1, 1);
+
+        createButton = new QPushButton(layoutWidget1);
+        createButton->setObjectName(QString::fromUtf8("createButton"));
+
+        gridLayout_2->addWidget(createButton, 1, 1, 1, 1);
+
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -176,19 +198,30 @@ public:
         label_3->setText(QApplication::translate("MainWindow", "\320\240\320\260\320\267\320\274\320\265\321\200 \320\272\320\273\320\265\321\202\320\272\320\270", nullptr));
         label_4->setText(QApplication::translate("MainWindow", "\320\232\320\276\320\273\320\270\321\207\320\265\321\201\321\202\320\262\320\276 \320\265\320\264\321\213", nullptr));
         label_5->setText(QApplication::translate("MainWindow", "\320\241\320\272\320\276\321\200\320\276\321\201\321\202\321\214 \320\270\320\263\321\200\321\213", nullptr));
-        connectButton->setText(QApplication::translate("MainWindow", "\320\237\320\276\320\264\320\272\320\273\321\216\321\207\320\270\321\202\321\214\321\201\321\217", nullptr));
-        createButton->setText(QApplication::translate("MainWindow", "\320\241\320\276\320\267\320\264\320\260\321\202\321\214 \321\201\320\265\321\200\320\262\320\265\321\200", nullptr));
 #ifndef QT_NO_TOOLTIP
-        lineEdit->setToolTip(QString());
+        ipEdit->setToolTip(QString());
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_STATUSTIP
-        lineEdit->setStatusTip(QString());
+        ipEdit->setStatusTip(QString());
 #endif // QT_NO_STATUSTIP
 #ifndef QT_NO_ACCESSIBILITY
-        lineEdit->setAccessibleDescription(QString());
+        ipEdit->setAccessibleDescription(QString());
 #endif // QT_NO_ACCESSIBILITY
-        lineEdit->setText(QString());
-        lineEdit->setPlaceholderText(QApplication::translate("MainWindow", "ip address", nullptr));
+        ipEdit->setText(QString());
+        ipEdit->setPlaceholderText(QApplication::translate("MainWindow", "ip address", nullptr));
+        connectButton->setText(QApplication::translate("MainWindow", "\320\237\320\276\320\264\320\272\320\273\321\216\321\207\320\270\321\202\321\214\321\201\321\217", nullptr));
+#ifndef QT_NO_TOOLTIP
+        playerEdit->setToolTip(QString());
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_STATUSTIP
+        playerEdit->setStatusTip(QString());
+#endif // QT_NO_STATUSTIP
+#ifndef QT_NO_ACCESSIBILITY
+        playerEdit->setAccessibleDescription(QString());
+#endif // QT_NO_ACCESSIBILITY
+        playerEdit->setText(QApplication::translate("MainWindow", "USUAL SNAKE", nullptr));
+        playerEdit->setPlaceholderText(QApplication::translate("MainWindow", "name", nullptr));
+        createButton->setText(QApplication::translate("MainWindow", "\320\241\320\276\320\267\320\264\320\260\321\202\321\214 \321\201\320\265\321\200\320\262\320\265\321\200", nullptr));
     } // retranslateUi
 
 };

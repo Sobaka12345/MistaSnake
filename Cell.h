@@ -1,7 +1,7 @@
 #ifndef CELL_H
 #define CELL_H
 
-#include "ActiveObjects/ActiveObject.h"
+#include "activeObjects/ActiveObject.h"
 
 class Cell
 {

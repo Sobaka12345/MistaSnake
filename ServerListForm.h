@@ -1,38 +1,45 @@
 #ifndef SERVERLISTFORM_H
 #define SERVERLISTFORM_H
 
-#include <QScrollArea>
-#include <SFML/Network.hpp>
-#include <thread>
-#include <QCloseEvent>
+#include <QWidget>
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QMessageBox>
+#include <QMap>
+
 
 namespace Ui {
 class ServerListForm;
 }
 
-class ServerListForm : public QScrollArea
+class ServerListForm : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit ServerListForm(QWidget *parent = nullptr);
-    ~ServerListForm();
+    explicit     ServerListForm (QWidget * owner, QWidget *parent = nullptr);
+                 ~ServerListForm() override;
+            void connectToServer(QString ip, QString name);
 
 
 public slots:
-    virtual void slotNewConnection();
-    void slotReadClient   ();
-    void listenClients();
+    virtual void slotNewConnection ();
+            void slotReadClient    ();
+            void listenClients     ();
+            void serverDisconnected();
+            void readServer        ();
 
 private:
-    QTcpServer * server;
-    void ServerListForm::closeEvent(QCloseEvent * event) override;
-    std::list<QTcpSocket*> clients;
-    Ui::ServerListForm *ui;
+            void closeEvent(QCloseEvent * event) override;
 
+    QTcpServer                   * server;
+    std::list<QTcpSocket*>       clients;
+    QTcpSocket                   serverSocket;
+    Ui::ServerListForm           * ui;
+    QMap<QTcpSocket *, QString>  players;
+
+signals:
+    void closeBox();
 
 };
 

@@ -4,7 +4,8 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    serverBox(this)
 {
     ui->setupUi(this);
 }
@@ -72,12 +73,11 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::on_connectButton_clicked()
 {
-   // ui->connectButton->setEnabled(false);
+   ui->connectButton->setEnabled(false);
+   serverBox.show();
+   serverBox.connectToServer(ui->ipEdit->text(), ui->playerEdit->text());
 }
 
-void MainWindow::connectToServer(const char * ip)
-{
-}
 
 
 void MainWindow::on_createButton_clicked()
@@ -89,5 +89,5 @@ void MainWindow::on_createButton_clicked()
 
 void MainWindow::setButtonEnabled()
 {
-    ui->connectButton->setEnabled(false);
+    ui->connectButton->setEnabled(true);
 }

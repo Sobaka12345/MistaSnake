@@ -1,18 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>ServerListForm</class>
- <widget class="QScrollArea" name="ServerListForm">
+ <widget class="QWidget" name="ServerListForm">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>480</width>
-    <height>313</height>
+    <width>430</width>
+    <height>316</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>ScrollArea</string>
+   <string>Form</string>
   </property>
+  <widget class="QScrollArea" name="playerScrollArea">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>241</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <property name="widgetResizable">
+    <bool>true</bool>
+   </property>
+   <widget class="QWidget" name="scrollAreaWidgetContents">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>239</width>
+      <height>189</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
  </widget>
  <resources/>
  <connections/>
