@@ -39,6 +39,10 @@ void ServerListForm::popClient()
     QTcpSocket * rem = (QTcpSocket*)sender();
     players.remove(rem);
     clients.remove(rem);
+    QStringList list;
+    for(auto x: players)
+        list << x;
+    model.setStringList(list);
 }
 
 void ServerListForm::slotReadClient()
@@ -48,9 +52,15 @@ void ServerListForm::slotReadClient()
     QString in(clientSocket->read(100));
     players.insert(clientSocket, in);
 
+
+    QStringList list;
     QString str;
     for(auto x : players)
+    {
         str += x + "\n";
+        list << x;
+    }
+    model.setStringList(list);
     clientSocket->write(str.toUtf8());
     if(!clientSocket->waitForBytesWritten())
         clientSocket->disconnectFromHost();
@@ -68,23 +78,24 @@ void ServerListForm::closeEvent(QCloseEvent * event)
         delete serverSocket;
         serverSocket = nullptr;
     }
-    for(auto it = clients.begin(); it != clients.end(); it++)
-    {
-        (*it)->disconnectFromHost();
-        delete *it;
-    }
+
     clients.clear();
 
     if(server != nullptr)
+    {
         if(server->isListening())
             server->close();
-    server = nullptr;
+        delete server;
+    }
     emit closeBox();
 }
 
 void ServerListForm::listenClients()
 {
     players.insert(nullptr, myName);
+    QStringList list;
+    list << myName;
+    model.setStringList(list);
     server = new QTcpServer(this);
     if (!server->listen(QHostAddress::Any, 32280)) {
             QMessageBox::critical(nullptr,
@@ -131,6 +142,7 @@ void ServerListForm::readServer()
 ServerListForm::~ServerListForm()
 {
     players.clear();
+
     if(serverSocket != nullptr)
     {
         if(serverSocket->state() == QTcpSocket::SocketState::ConnectedState)
@@ -141,7 +153,6 @@ ServerListForm::~ServerListForm()
     for(auto it = clients.begin(); it != clients.end(); it++)
     {
         (*it)->disconnectFromHost();
-        delete *it;
     }
     clients.clear();
     if(server != nullptr)
