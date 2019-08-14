@@ -27,11 +27,20 @@ void ServerListForm::slotNewConnection()
     connect(pClientSocket, SIGNAL(disconnected()),
             pClientSocket, SLOT(deleteLater())
            );
+    connect(pClientSocket, SIGNAL(disconnected()),
+            this,          SLOT(popClient())
+           );
     connect(pClientSocket, SIGNAL(readyRead()),
             this,          SLOT(slotReadClient())
            );
 }
 
+void ServerListForm::popClient()
+{
+    QTcpSocket * rem = (QTcpSocket*)sender();
+    players.remove(rem);
+    clients.remove(rem);
+}
 
 void ServerListForm::slotReadClient()
 {
@@ -39,6 +48,13 @@ void ServerListForm::slotReadClient()
 
     QString in(clientSocket->read(100));
     players.insert(clientSocket, in);
+
+    QString str;
+    for(auto x : players)
+        str += x + "\n";
+    clientSocket->write(str.toUtf8());
+    if(!clientSocket->waitForBytesWritten())
+        clientSocket->disconnectFromHost();
 }
 
 void ServerListForm::closeEvent(QCloseEvent * event)
