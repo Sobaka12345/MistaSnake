@@ -91,3 +91,8 @@ void MainWindow::setButtonEnabled()
 {
     ui->connectButton->setEnabled(true);
 }
+
+const QString MainWindow::getName() const
+{
+    return ui->playerEdit->text();
+}

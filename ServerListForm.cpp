@@ -1,14 +1,18 @@
 #include "ServerListForm.h"
 #include "ui_ServerListForm.h"
+#include "MainWindow.h"
 
 
-ServerListForm::ServerListForm(QWidget * owner, QWidget *parent) :
+ServerListForm::ServerListForm(MainWindow * owner, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ServerListForm)
 {
     ui->setupUi(this);
     server = nullptr;
+    serverSocket = nullptr;
     connect(this, SIGNAL(closeBox()), owner, SLOT(setButtonEnabled()));
+    myName = owner->getName();
+    ui->playerListView->setModel(&model);
 }
 
 void ServerListForm::serverDisconnected()
@@ -26,18 +30,8 @@ void ServerListForm::slotNewConnection()
     connect(pClientSocket, SIGNAL(readyRead()),
             this,          SLOT(slotReadClient())
            );
-    connect(pClientSocket, SIGNAL(connected()),
-            pClientSocket, SLOT(sendPlayersInfo()));
 }
 
-void ServerListForm::sendPlayersInfo()
-{
-    QTcpSocket* pClientSocket = (QTcpSocket*)sender();
-    QString out;
-    for(auto x : players)
-        out += x + '\n';
-    pClientSocket->write(out.toUtf8());
-}
 
 void ServerListForm::slotReadClient()
 {
@@ -51,8 +45,11 @@ void ServerListForm::closeEvent(QCloseEvent * event)
 {
     Q_UNUSED(event);
     players.clear();
-    if(serverSocket.state() == QTcpSocket::SocketState::ConnectedState)
-        serverSocket.disconnectFromHost();
+    if(serverSocket->state() == QTcpSocket::SocketState::ConnectedState)
+        serverSocket->disconnectFromHost();
+    serverSocket->close();
+    delete serverSocket;
+    serverSocket = nullptr;
     for(auto it = clients.begin(); it != clients.end(); it++)
     {
         (*it)->disconnectFromHost();
@@ -63,11 +60,13 @@ void ServerListForm::closeEvent(QCloseEvent * event)
     if(server != nullptr)
         if(server->isListening())
             server->close();
+    server = nullptr;
     emit closeBox();
 }
 
 void ServerListForm::listenClients()
 {
+    players.insert(nullptr, myName);
     server = new QTcpServer(this);
     if (!server->listen(QHostAddress::Any, 32280)) {
             QMessageBox::critical(nullptr,
@@ -85,16 +84,18 @@ void ServerListForm::listenClients()
 
 void ServerListForm::connectToServer(QString ip, QString name)
 {
-    connect(&serverSocket, SIGNAL(disconnected()),
+    serverSocket = new  QTcpSocket();
+    connect(serverSocket, SIGNAL(disconnected()),
             this, SLOT(serverDisconnected()));
-    connect(&serverSocket, SIGNAL(readyRead()),
+    connect(serverSocket, SIGNAL(readyRead()),
             this, SLOT(readServer()));
-    serverSocket.connectToHost(ip, 32280);
-    if(serverSocket.waitForConnected(3000)) {
-        serverSocket.write(name.toUtf8());
+    serverSocket->connectToHost(ip, 32280);
+    serverSocket->open(QIODevice::ReadWrite);
+    if(serverSocket->waitForConnected(3000)) {
+        serverSocket->write(name.toUtf8());
     }
     else {
-        emit serverSocket.disconnected();
+        serverSocket->disconnectFromHost();
     }
 
 }
@@ -104,19 +105,21 @@ void ServerListForm::connectToServer(QString ip, QString name)
 void ServerListForm::readServer()
 {
     QStringList list;
-    while (serverSocket.canReadLine())
-    {
-        QString data = QString(serverSocket.readLine());
-        std::cout << data.toStdString() << std::endl;
-        list.append(data);
-    }
+    while(serverSocket->canReadLine())
+        list.push_back(serverSocket->readLine(quint64(100)));
+    model.setStringList(list);
 }
 
 ServerListForm::~ServerListForm()
 {
     players.clear();
-    if(serverSocket.state() == QTcpSocket::SocketState::ConnectedState)
-        serverSocket.disconnectFromHost();
+    if(serverSocket != nullptr)
+    {
+        if(serverSocket->state() == QTcpSocket::SocketState::ConnectedState)
+            serverSocket->disconnectFromHost();
+        serverSocket->close();
+        delete serverSocket;
+    }
     for(auto it = clients.begin(); it != clients.end(); it++)
     {
         (*it)->disconnectFromHost();

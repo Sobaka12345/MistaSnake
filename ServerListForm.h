@@ -6,6 +6,9 @@
 #include <QTcpSocket>
 #include <QMessageBox>
 #include <QMap>
+#include <QStringListModel>
+
+class MainWindow;
 
 
 namespace Ui {
@@ -17,7 +20,7 @@ class ServerListForm : public QWidget
     Q_OBJECT
 
 public:
-    explicit     ServerListForm (QWidget * owner, QWidget *parent = nullptr);
+    explicit     ServerListForm (MainWindow * owner, QWidget *parent = nullptr);
                  ~ServerListForm() override;
             void connectToServer(QString ip, QString name);
 
@@ -28,19 +31,21 @@ public slots:
             void listenClients     ();
             void serverDisconnected();
             void readServer        ();
-            void sendPlayersInfo   ();
 
 private:
             void closeEvent(QCloseEvent * event) override;
 
     QTcpServer                   * server;
     std::list<QTcpSocket*>       clients;
-    QTcpSocket                   serverSocket;
+    QTcpSocket                   * serverSocket;
     Ui::ServerListForm           * ui;
     QMap<QTcpSocket *, QString>  players;
+    QString                      myName;
+    QStringListModel             model;
 
 signals:
     void closeBox();
+    void sendInfo();
 
 };
 
