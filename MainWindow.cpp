@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     serverBox(this)
 {
     ui->setupUi(this);
+    serverBox.setHostName(ui->playerEdit->text());
 }
 
 MainWindow::~MainWindow()
@@ -92,7 +93,8 @@ void MainWindow::setButtonEnabled()
     ui->connectButton->setEnabled(true);
 }
 
-const QString MainWindow::getName() const
+QString MainWindow::getName()
 {
-    return ui->playerEdit->text();
+    QString a(ui->playerEdit->text());
+    return a;
 }

@@ -8,7 +8,6 @@
 #include <QMap>
 #include <QStringListModel>
 
-class MainWindow;
 
 
 namespace Ui {
@@ -20,9 +19,13 @@ class ServerListForm : public QWidget
     Q_OBJECT
 
 public:
-    explicit     ServerListForm (MainWindow * owner, QWidget *parent = nullptr);
+    explicit     ServerListForm (QWidget * owner, QWidget *parent = nullptr);
                  ~ServerListForm() override;
             void connectToServer(QString ip, QString name);
+            void setHostName(QString name)
+            {
+                myName = name;
+            }
 
 
 public slots:

@@ -1,9 +1,9 @@
 #include "ServerListForm.h"
 #include "ui_ServerListForm.h"
-#include "MainWindow.h"
 
 
-ServerListForm::ServerListForm(MainWindow * owner, QWidget *parent) :
+
+ServerListForm::ServerListForm(QWidget * owner, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ServerListForm)
 {
@@ -11,7 +11,6 @@ ServerListForm::ServerListForm(MainWindow * owner, QWidget *parent) :
     server = nullptr;
     serverSocket = nullptr;
     connect(this, SIGNAL(closeBox()), owner, SLOT(setButtonEnabled()));
-    myName = owner->getName();
     ui->playerListView->setModel(&model);
 }
 
@@ -61,11 +60,14 @@ void ServerListForm::closeEvent(QCloseEvent * event)
 {
     Q_UNUSED(event);
     players.clear();
-    if(serverSocket->state() == QTcpSocket::SocketState::ConnectedState)
-        serverSocket->disconnectFromHost();
-    serverSocket->close();
-    delete serverSocket;
-    serverSocket = nullptr;
+    if(serverSocket != nullptr)
+    {
+        if(serverSocket->state() == QTcpSocket::SocketState::ConnectedState)
+            serverSocket->disconnectFromHost();
+        serverSocket->close();
+        delete serverSocket;
+        serverSocket = nullptr;
+    }
     for(auto it = clients.begin(); it != clients.end(); it++)
     {
         (*it)->disconnectFromHost();

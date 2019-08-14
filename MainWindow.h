@@ -30,7 +30,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    const QString getName() const;
+    QString getName();
 
 public slots:
     void runGame(unsigned int width, unsigned int height, unsigned int cellSize,
