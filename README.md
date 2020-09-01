@@ -1,2 +1,2 @@
 # MistaSnake
-Me &amp; ма гёрл. 4EVER ALPHA.
+Multisnake by me &amp; ма гёрл. 4EVER ALPHA.
